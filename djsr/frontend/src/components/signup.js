@@ -1,0 +1,175 @@
+
+import React, { Component } from "react";
+import axiosInstance from "../axiosApi";
+import { h1_style, submit, main_div, component_margin, dropdown, paperContent, main_body } from './style';
+import Paper from '@material-ui/core/Paper';
+
+import { createBrowserHistory } from "history";
+import MenuItem from '@material-ui/core/MenuItem';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
+
+
+class Signup extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: "",
+            password: "",
+            email: "",
+            user_type: "College",
+            confirm_password: "",
+            errors: {},
+            invalid_confirm: false,
+
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({ [event.target.name]: event.target.value });
+        if (this.state.password === this.state.confirm_password) {
+            this.setState({ invalid_confirm: false })
+        } 
+    }
+
+    async handleSubmit(event) {
+        event.preventDefault();
+        if (this.state.password != this.state.confirm_password) {
+            this.setState({ invalid_confirm: true })
+        } else {
+            this.setState({ invalid_confirm: false })
+            try {
+                const response = await axiosInstance.post('/user/create/', {
+                    username: this.state.username,
+                    email: this.state.email,
+                    password: this.state.password,
+                    user_type: this.state.user_type
+                });
+                this.props.history.push("/login/")
+            } catch (error) {
+                this.setState({
+                    errors: error.response.data
+                });
+            }
+        }
+
+
+    }
+
+    
+    render() {
+        return (
+            <div style={main_body}>
+                <Paper elevation={3} style={paperContent}>
+                    <h1 style={h1_style}>Signup</h1>
+                    <div style={main_div}>
+
+                        <form onSubmit={this.handleSubmit} noValidate autoComplete="off" >
+                            <TextField
+                                error={this.state.errors.username ? true : false}
+                                style={component_margin}
+                                className="inputs componentsMargin"
+                                
+                                type="text"
+                                name="username"
+                                FormHelperTextProps={{ color: "red" }}
+                                helperText={this.state.errors.username ? this.state.errors.username : null}
+                                value={this.state.username}
+                                onChange={this.handleChange}
+                                label="Username"
+                                variant="outlined" />
+
+                            <br />
+
+                            <TextField
+                                error={this.state.errors.email ? true : false}
+                                style={component_margin}
+                                className="inputs componentsMargin"
+                                
+                                type="email"
+                                name="email"
+                                label="Email"
+                                variant="outlined"
+                                value={this.state.email}
+                                helperText={this.state.errors.email ? this.state.errors.email : null}
+                                onChange={this.handleChange} />
+
+                            <br />
+                            <FormControl required
+                                style={dropdown}
+                            >
+
+                                <Select
+
+                                    labelId="demo-simple-select-required-label"
+                                    id="demo-simple-select-required"
+                                    name="user_type"
+                                    value={this.state.user_type}
+                                    onChange={this.handleChange}
+                                    className="componentsMargin"
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value="College">College</MenuItem>
+                                    <MenuItem value="Professor">Professor</MenuItem>
+                                    <MenuItem value="Student">Student</MenuItem>
+                                </Select>
+                                <FormHelperText>Select Your type</FormHelperText>
+                            </FormControl><br />
+                            <TextField
+                                error={this.state.errors.password ? true : false}
+                                style={component_margin}
+                                className="inputs componentsMargin"
+                                
+                                type="password"
+                                name="password"
+                                label="Password"
+                                variant="outlined"
+                                value={this.state.password}
+                                helperText={this.state.errors.password ? this.state.errors.password : null}
+                                onChange={this.handleChange} />
+
+                            <br />
+
+                            <TextField
+                                error={this.state.invalid_confirm ? true : false}
+                                style={component_margin}
+                                className="inputs componentsMargin"
+                                
+                                type="password"
+                                name="confirm_password"
+                                label="Confirm Password"
+                                variant="outlined"
+                                helperText="Both password should be match"
+                                value={this.state.confirm_password}
+                                onChange={this.handleChange} />
+
+                            <br />
+
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                style={submit}
+                                type="submit"
+                            >
+                                Signup
+                             </Button>
+                        </form>
+                    </div>
+                </Paper>
+            </div>
+
+
+        )
+    }
+}
+
+export default Signup;

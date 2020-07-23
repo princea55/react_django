@@ -1,0 +1,13 @@
+.main-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:10%;
+}
+.components-margin{
+    margin: 5px;
+}
+.select-size{
+    max-width: 120;
+    margin: 1%;
+}

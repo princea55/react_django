@@ -1,0 +1,16 @@
+.ceneterdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:10%;
+}
+.componentsMargin{
+    margin: 5px;
+}
+.selectSize{
+    max-width: 120;
+    margin: 1%;
+}
+h1{
+    color: red;
+}
