@@ -129,7 +129,7 @@ collagelist=(
 )
 
 
-user_type_data = (('College', "College"), ('Professor', "Professor"), ("Student", "Student"))
+user_type_data = (("Student", "Student"),('College', "College"), ('Professor', "Professor"), )
 
 class CustomUser(AbstractUser):
     user_type=models.CharField(max_length=100,choices=user_type_data)
@@ -138,7 +138,7 @@ class CustomUser(AbstractUser):
         return self.username
 
 class College(models.Model):
-    user=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='college')
+    user=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='student')
     phone = models.CharField(blank=False, unique=True,max_length=12)
     college=models.CharField(max_length=300)
     city=models.CharField(max_length=100,blank=False)

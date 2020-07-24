@@ -6,18 +6,18 @@ export default class ProfessorList extends Component {
         this.state = {
             islogin: "",
             invalid_college: "",
-            professor_list: "",
+            student_list: "",
         };
         this.record_list = this.record_list.bind(this);
 
     }
     async record_list(college_serach) {
         const header = localStorage.getItem("access_token");
-        let professors;
+        let students;
         try {
-            professors = await axiosInstance.get(`/professorlist/?search=${college_serach}`, { headers: { "Authorization": `Token ${header}` } });
+            students = await axiosInstance.get(`/studentlist/?search=${college_serach}`, { headers: { "Authorization": `Token ${header}` } });
             this.setState({
-                professor_list: professors.data
+                student_list: students.data
             });
         } catch (error) {
             console.log(error);
@@ -50,28 +50,30 @@ export default class ProfessorList extends Component {
 
                 <div className="table-responsive mt-3">
                     <table className="table table-hover">
-                        <caption>List of Professors</caption>
+                        <caption>List of Students</caption>
                         <thead>
                             <tr className="table-info">
                                 <th scope="col"></th>
+                                <th scope="col">Enrollment</th>
                                 <th scope="col">Username</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Department</th>
-                                <th scope="col">Role</th>
+                                <th scope="col">Semester</th>
                                 <th scope="col">College</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                Object.keys(this.state.professor_list).map((item, i) => (
+                                Object.keys(this.state.student_list).map((item, i) => (
                                     <tr key={i}>
                                         <th scope="row">{i + 1}</th>
 
-                                        <td>{this.state.professor_list[item].username}</td>
-                                        <td>{this.state.professor_list[item].email}</td>
-                                        <td>{this.state.professor_list[item].department}</td>
-                                        <td>{this.state.professor_list[item].role}</td>
-                                        <td>{this.state.professor_list[item].college}</td>
+                                        <td>{this.state.student_list[item].enrollment}</td>
+                                        <td>{this.state.student_list[item].username}</td>
+                                        <td>{this.state.student_list[item].email}</td>
+                                        <td>{this.state.student_list[item].department}</td>
+                                        <td>{this.state.student_list[item].semester}</td>
+                                        <td>{this.state.student_list[item].college}</td>
                                     </tr>
                                 ))
                             }

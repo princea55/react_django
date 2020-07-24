@@ -116,7 +116,7 @@ class DestroyProfessor(generics.DestroyAPIView):
     permission_classes = [IsProfessor,IsCollege]
 
 class ListProfessors(generics.ListAPIView):
-    search_fields = ['college','=department', '=role','=user__username',]
+    search_fields = ['=department', '=role','=user__username','college']
     filter_backends = (filters.SearchFilter,)
     queryset = Professors.objects.all()
     serializer_class = Professorserializer

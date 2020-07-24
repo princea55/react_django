@@ -21,7 +21,7 @@ class Signup extends Component {
             username: "",
             password: "",
             email: "",
-            user_type: "College",
+            user_type: "Student",
             confirm_password: "",
             errors: {},
             invalid_confirm: false,
@@ -115,12 +115,10 @@ class Signup extends Component {
                                     onChange={this.handleChange}
                                     className="componentsMargin"
                                 >
-                                    <MenuItem value="">
-                                        <em>None</em>
-                                    </MenuItem>
+                                    <MenuItem value="Student">Student</MenuItem>
                                     <MenuItem value="College">College</MenuItem>
                                     <MenuItem value="Professor">Professor</MenuItem>
-                                    <MenuItem value="Student">Student</MenuItem>
+                                    
                                 </Select>
                                 <FormHelperText>Select Your type</FormHelperText>
                             </FormControl><br />

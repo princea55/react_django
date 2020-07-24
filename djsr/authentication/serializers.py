@@ -49,15 +49,20 @@ class Collegeserializer(serializers.ModelSerializer):
 
 class Professorserializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    username = serializers.CharField(source='user.username', read_only=True)
+    email = serializers.CharField(source='user.email', read_only=True)
+   
 
     class Meta:
         model = Professors
-        fields = ['id','user','college','department','role','user_id']
+        fields = ['id','user','college','department','role','user_id','username','email']
 
 class Studentserializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    username = serializers.CharField(source='user.username', read_only=True)
+    email = serializers.CharField(source='user.email', read_only=True)
 
     class Meta:
         model = Students
-        fields = ['id','college','enrollment','semester','department','user','user_id']
+        fields = ['id','college','enrollment','semester','department','user','user_id','username','email']
 

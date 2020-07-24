@@ -20,7 +20,8 @@ import Signup from "./signup";
 import College from "./college";
 import Logout from "./Logout";
 import CollegeDetail from './collegeDetail';
-import EditProfile from './editProfile';
+import ProfessorList from './ProfessorList';
+import StudentList from './StudentList';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -149,13 +150,42 @@ const MyDrawer = withStyles(styles)(
                     <ListItem button component={Link} to="/select_college/" onClick={onItemClick('College')}>
                         <ListItemText>Select College</ListItemText>
                     </ListItem>
-                    <ListItem button component={Link} to="/professor_list/" onClick={onItemClick('ProfessorList')}>
-                        <ListItemText>Professor List</ListItemText>
+                    <ListItem button component={Link} to="/professors_list/" onClick={onItemClick('ProfessorsList')}>
+                        <ListItemText>Professors List</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/students_list/" onClick={onItemClick('StudentsList')}>
+                        <ListItemText>Students List</ListItemText>
                     </ListItem>
                     <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
                         <ListItemText>Logout</ListItemText>
                     </ListItem>
                 </List>):(null)}
+                {user_type === 'Professor'?( <List>
+                    <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>
+                        <ListItemText>Profile</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/select_college/" onClick={onItemClick('College')}>
+                        <ListItemText>Select College</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/students_list/" onClick={onItemClick('StudentsList')}>
+                        <ListItemText>Students List</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
+                        <ListItemText>Logout</ListItemText>
+                    </ListItem>
+                </List>):(null)}
+                {user_type === 'Student'?( <List>
+                    <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>
+                        <ListItemText>Profile</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/select_college/" onClick={onItemClick('College')}>
+                        <ListItemText>Select College</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
+                        <ListItemText>Logout</ListItemText>
+                    </ListItem>
+                </List>):(null)}
+                
                
             </Drawer>
             <div>
@@ -179,8 +209,13 @@ const MyDrawer = withStyles(styles)(
                     />
                     <Route
                         exact
-                        path="/professor_list/"
+                        path="/professors_list/"
                         render={(routeprops) => <ProfessorList  {...routeprops} />}
+                    />
+                    <Route
+                        exact
+                        path="/students_list/"
+                        render={(routeprops) => <StudentList  {...routeprops} />}
                     />
                     
                     <Route
