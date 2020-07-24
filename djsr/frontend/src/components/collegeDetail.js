@@ -11,10 +11,9 @@ import {
 
 import Paper from "@material-ui/core/Paper";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import CardMedia from '@material-ui/core/CardMedia'
 class CollegeDetail extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +26,10 @@ class CollegeDetail extends Component {
             islogin: false,
             department: "",
             role: "",
-            user_type: ""
+            user_type: "",
+            semester: "",
+            enrollment: "",
+            
         };
     }
 
@@ -50,7 +52,10 @@ class CollegeDetail extends Component {
                 phone: current_user_detail.phone,
                 college: current_user_detail.college,
                 department: current_user_detail.department,
+                semester: current_user_detail.semester,
+                enrollment: current_user_detail.enrollment,
                 role: current_user_detail.role,
+                
             });
         }
     }
@@ -99,9 +104,7 @@ class CollegeDetail extends Component {
                                                 <br />
                                             </Typography>
                                         </CardContent>
-                                        {/* <CardActions>
-                                    <Button size="small">Learn More</Button>
-                                </CardActions> */}
+
                                     </Card>
                                 </div>
                             </div>
@@ -116,6 +119,7 @@ class CollegeDetail extends Component {
                                 <div style={main_div}>
 
                                     <Card style={root} variant="outlined">
+                                        
                                         <CardContent>
                                             <Typography
                                                 style={title}
@@ -151,9 +155,63 @@ class CollegeDetail extends Component {
                                                 <br />
                                             </Typography>
                                         </CardContent>
-                                        {/* <CardActions>
-                                    <Button size="small">Learn More</Button>
-                                </CardActions> */}
+
+                                    </Card>
+                                </div>
+                            </div>
+                        </Paper>
+                    </div>
+                );
+            } else if (this.state.user_type === "Student") {
+                return (
+                    <div style={main_body}>
+                        <Paper elevation={3} style={paperContent}>
+                            <div>
+                                <div style={main_div}>
+                                    
+                                    <Card style={root} variant="outlined">
+                                    
+                                        <CardContent>
+                                            <Typography
+                                                style={title}
+                                                color="textSecondary"
+                                                gutterBottom
+                                            >
+                                                Username
+                                            </Typography>
+                                            <Typography variant="h5" style={pos} component="h2">
+                                                {this.state.username}
+                                            </Typography>
+
+                                            <Typography color="textSecondary">Email</Typography>
+                                            <Typography variant="body2" style={pos} component="p">
+                                                {this.state.email}
+                                                <br />
+                                            </Typography>
+
+                                            <Typography color="textSecondary">Enrollment</Typography>
+                                            <Typography variant="body2" style={pos} component="p">
+                                                {this.state.enrollment}
+                                                <br />
+                                            </Typography>
+
+                                            <Typography color="textSecondary">Department</Typography>
+                                            <Typography variant="body2" style={pos} scomponent="p">
+                                                {this.state.department}
+                                                <br />
+                                            </Typography>
+                                            <Typography color="textSecondary">Semester</Typography>
+                                            <Typography variant="body2" style={pos} scomponent="p">
+                                                {this.state.semester}
+                                                <br />
+                                            </Typography>
+                                            <Typography color="textSecondary">College</Typography>
+                                            <Typography variant="body2" style={pos} scomponent="p">
+                                                {this.state.college}
+                                                <br />
+                                            </Typography>
+                                        </CardContent>
+
                                     </Card>
                                 </div>
                             </div>

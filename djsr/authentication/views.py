@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer,Collegeserializer,Studentserializer,Professorserializer
 from rest_framework.permissions import IsAuthenticated
-from .permissions import IsProfessor,IsCollege,IsStudent, IsAdmin
+from .permissions import IsProfessor,IsCollege,IsStudent
 from rest_framework import generics,filters
 from .models import CustomUser,Students,Professors,College
 from rest_framework import filters
@@ -20,7 +20,7 @@ class ObtainTokenPairWithColorView(TokenObtainPairView):
 
 class CustomUserCreate(APIView):
     authentication_classes = ()
-    permission_classes = (permissions.AllowAny ,IsAdmin )
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request, format='json'):
         serializer = CustomUserSerializer(data=request.data)
@@ -67,7 +67,7 @@ class DestroyCustomUser(generics.DestroyAPIView):
 class CreateCollege(generics.CreateAPIView):
     queryset = Students.objects.all()
     serializer_class = Collegeserializer
-    permission_classes = [IsCollege]
+    permission_classes = [IsCollege,]
 
 class DetailCollege(generics.RetrieveAPIView):
     queryset = College.objects.all()
@@ -83,7 +83,7 @@ class UpdateCollege(generics.RetrieveUpdateAPIView):
 class DestroyCollege(generics.DestroyAPIView):
     queryset = College.objects.all()
     serializer_class = Collegeserializer
-    permission_classes = [IsProfessor,IsCollege,IsAdmin ]
+    permission_classes = [IsProfessor,IsCollege ]
 
 class ListCollege(generics.ListAPIView):
     search_fields = ['=user__username','=phone']
@@ -113,7 +113,7 @@ class UpdateProfessor(generics.UpdateAPIView):
 class DestroyProfessor(generics.DestroyAPIView):
     queryset = Professors.objects.all()
     serializer_class = Professorserializer
-    permission_classes = [IsProfessor,IsCollege,IsAdmin]
+    permission_classes = [IsProfessor,IsCollege]
 
 class ListProfessors(generics.ListAPIView):
     search_fields = ['college','=department', '=role','=user__username',]
@@ -147,8 +147,8 @@ class DestroyStudent(generics.DestroyAPIView):
     permission_classes = [IsProfessor,IsCollege]
 
 class ListStudents(generics.ListAPIView):
-    search_fields = ['name', '=semester', '=enrollment', 'department', 'college__name']
+    search_fields = ['=user__username', '=semester', '=enrollment', 'department', 'college']
     filter_backends = (filters.SearchFilter,)
     queryset = Students.objects.all()
     serializer_class = Studentserializer
-    permission_classes = [IsProfessor|IsCollege]
+    permission_classes = [permissions.AllowAny,]

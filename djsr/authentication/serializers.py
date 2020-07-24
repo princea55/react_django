@@ -59,5 +59,5 @@ class Studentserializer(serializers.ModelSerializer):
 
     class Meta:
         model = Students
-        fields = ['college','profile_pic','enrollment','semester','department','user','user_id']
+        fields = ['id','college','enrollment','semester','department','user','user_id']
 

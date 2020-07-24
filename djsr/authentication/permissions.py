@@ -3,10 +3,7 @@ from rest_framework.permissions import BasePermission
 class IsCollege(BasePermission):
     def has_permission(self, request, view):
         return request.user.user_type=='College' 
-     
-class IsAdmin(BasePermission):
-    def has_permission(self, request, view):
-        return request.user.user_type=='Admin' 
+
 
 class IsProfessor(BasePermission):
     def has_permission(self, request, view):

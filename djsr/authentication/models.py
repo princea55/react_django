@@ -129,7 +129,7 @@ collagelist=(
 )
 
 
-user_type_data = (("Admin", "Admin"),('College', "College"), ('Professor', "Professor"), ("Student", "Student"))
+user_type_data = (('College', "College"), ('Professor', "Professor"), ("Student", "Student"))
 
 class CustomUser(AbstractUser):
     user_type=models.CharField(max_length=100,choices=user_type_data)
@@ -204,7 +204,7 @@ class Students(models.Model):
     )
     user=models.ForeignKey(CustomUser,on_delete=models.CASCADE,related_name='students')
     college=models.CharField(max_length=300,blank=False)
-    profile_pic=models.FileField(blank=True, null=True)
+    
     enrollment = models.CharField(max_length=50,blank=False, unique=True)
     semester = models.CharField(max_length=5,blank=False)
     department = models.CharField(max_length=50,blank=False)

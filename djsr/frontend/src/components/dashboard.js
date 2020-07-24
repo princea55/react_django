@@ -130,7 +130,7 @@ const OnlyLoginSignup = withStyles(styles)(
 );
 
 const MyDrawer = withStyles(styles)(
-    ({ classes, variant, open, onClose, onItemClick }) => (
+    ({ classes, variant, open, onClose, onItemClick, user_type}) => (
         <Router history={history}>
             <Drawer variant={variant} open={open} onClose={onClose}
                 classes={{
@@ -142,18 +142,21 @@ const MyDrawer = withStyles(styles)(
                         [classes.toolbarMargin]: variant === 'persistent'
                     })}
                 />
-
-                <List>
+                {user_type === 'College'?( <List>
                     <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>
                         <ListItemText>Profile</ListItemText>
                     </ListItem>
                     <ListItem button component={Link} to="/select_college/" onClick={onItemClick('College')}>
                         <ListItemText>Select College</ListItemText>
                     </ListItem>
+                    <ListItem button component={Link} to="/professor_list/" onClick={onItemClick('ProfessorList')}>
+                        <ListItemText>Professor List</ListItemText>
+                    </ListItem>
                     <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
                         <ListItemText>Logout</ListItemText>
                     </ListItem>
-                </List>
+                </List>):(null)}
+               
             </Drawer>
             <div>
 
@@ -173,6 +176,11 @@ const MyDrawer = withStyles(styles)(
                         exact
                         path="/select_college/"
                         render={(routeprops) => <College  {...routeprops} />}
+                    />
+                    <Route
+                        exact
+                        path="/professor_list/"
+                        render={(routeprops) => <ProfessorList  {...routeprops} />}
                     />
                     
                     <Route
@@ -204,6 +212,8 @@ function AppBarInteraction({ classes, variant }) {
         setDrawer(variant === 'temporary' ? drawer : false);
         setDrawer(!drawer);
     };
+    const current_user = JSON.parse(localStorage.getItem("current_user"));
+    
     if (localStorage.getItem("islogin")) {
         return (
             <div className={classes.bodyContent}>
@@ -213,7 +223,7 @@ function AppBarInteraction({ classes, variant }) {
                         open={drawer}
                         onClose={toggleDrawer}
                         onItemClick={onItemClick}
-
+                        user_type = {current_user.user_type}
                         variant={variant}
                     />
                 </div>

@@ -27,11 +27,14 @@ class Hello extends Component {
             phone: "",
             city: "",
             department: "",
+            semester: "",
+            enrollment: "",
             errors: {},
             user_errors: {},
             islogin: false,
             current_user_detail: "",
             role: "",
+            
             collagelist: ["GOVERNMENT ENGINEERING COLLEGE, BHARUCH",
                 "GOVERNMENT ENGINEERING COLLEGE,BHAVNAGAR",
                 "GOVERNMENT ENGINEERING COLLEGE, BHUJ",
@@ -44,6 +47,7 @@ class Hello extends Component {
         this.handleSubmitWThen = this.handleSubmitWThen.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.get_message = this.get_message.bind(this);
+        // this.onImageChange = this.onImageChange.bind(this);
     }
     handleChange(event) {
         this.setState({ [event.target.name]: event.target.value });
@@ -88,18 +92,20 @@ class Hello extends Component {
                 }
             } else if (this.state.user_type === "Student") {
                 if (this.state.id) {
-                    await axiosInstance.put(`professor/update/${this.state.id}/`, {
+                    await axiosInstance.put(`student/update/${this.state.id}/`, {
                         college: this.state.college,
                         department: this.state.department,
-                        role: this.state.role,
+                        enrollment: this.state.enrollment,
+                        semester: this.state.semester,
                         user_id: this.state.id
                     }, { headers: { "Authorization": `JWT ${header}` } });
 
                 } else {
-                    await axiosInstance.post('/professor/', {
+                    await axiosInstance.post('/students/', {
                         college: this.state.college,
                         department: this.state.department,
-                        role: this.state.role,
+                        enrollment: this.state.enrollment,
+                        semester: this.state.semester,
                     }, { headers: { "Authorization": `JWT ${header}` } });
                 }
             }
@@ -112,17 +118,23 @@ class Hello extends Component {
         }
         this.get_message()
     }
+    // onImageChange(event){
+    //     this.setState({
+    //         img: event.target.files[0]
+    //     });
+    //     console.log(event.target.files[0]);
+    // }
     async get_message() {
         let college_detail_response;
         try {
             if (this.state.user_type === "College") {
                 college_detail_response = await axiosInstance.get(`/college/list/?search=${this.state.phone}`, { headers: { "Authorization": `Token ${this.state.token}` } });
-            } else if (this.state.user_type === "Professor"){
+            } else if (this.state.user_type === "Professor") {
                 college_detail_response = await axiosInstance.get(`professorlist/?search=${this.state.username}`, { headers: { "Authorization": `Token ${this.state.token}` } });
-            }else if (this.state.user_type === "Student"){
-                college_detail_response = await axiosInstance.get(`professorlist/?search=${this.state.username}`, { headers: { "Authorization": `Token ${this.state.token}` } });
+            } else if (this.state.user_type === "Student") {
+                college_detail_response = await axiosInstance.get(`studentlist/?search=${this.state.username}`, { headers: { "Authorization": `Token ${this.state.token}` } });
             }
-            
+
             this.setState({
                 current_user_detail: college_detail_response.data[0]
             });
@@ -154,9 +166,9 @@ class Hello extends Component {
                 department: current_user_detail.department,
                 user_id: current_user_detail.user_id,
                 role: current_user_detail.role,
-                enrollment:current_user_detail.enrollment,
-                semester:current_user_detail.semester,
-                profile_pic:current_user_detail.profile_pic,
+                enrollment: current_user_detail.enrollment,
+                semester: current_user_detail.semester,
+                
             });
         }
 
@@ -248,6 +260,7 @@ class Hello extends Component {
                                 <div style={main_div}>
 
                                     <form onSubmit={this.handleSubmitWThen} noValidate autoComplete="off">
+
                                         <FormControl required
                                             style={{
                                                 margin: "5px",
@@ -305,6 +318,93 @@ class Hello extends Component {
                                             value={this.state.department}
                                             onChange={this.handleChange}
                                             label="Department"
+                                            variant="outlined" />
+                                        <br />
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            style={submit}
+                                            type="submit"
+                                        >
+                                            Update
+                                     </Button>
+                                    </form>
+                                </div>
+                            </div>
+                        </Paper>
+                    </div>
+                )
+            } else if (this.state.user_type === "Student") {
+                return (
+                    <div style={main_body}>
+                        <Paper elevation={3} style={paperContent}>
+                            <div >
+                                {this.state.errors ? this.state.errors.detail : null}
+                                <div style={main_div}>
+                                    <form onSubmit={this.handleSubmitWThen} noValidate autoComplete="off">
+                                        <FormControl required
+                                            style={{
+                                                margin: "5px",
+                                                width: "27rem",
+                                            }}
+                                        >
+                                            <Select
+                                                labelId="demo-simple-select-required-label"
+                                                id="demo-simple-select-required"
+                                                name="college"
+                                                value={this.state.college}
+                                                onChange={this.handleChange}
+                                                className="componentsMargin"
+                                            >
+                                                <MenuItem value="">
+                                                    <em>None</em>
+                                                </MenuItem>
+                                                {this.state.collagelist.map(i =>
+                                                    <MenuItem value={i} key={uuid()}>
+                                                        {i}
+                                                    </MenuItem>
+                                                )}
+                                            </Select>
+                                            <FormHelperText>Select Your College</FormHelperText>
+                                        </FormControl><br />
+
+                                        <TextField
+                                            error={this.state.errors.department ? true : false}
+                                            style={component_margin}
+                                            helperText={this.state.errors.department ? this.state.errors.department : null}
+                                            className="inputs componentsMargin"
+                                            id="outlined-basic"
+                                            type="text"
+                                            name="department"
+                                            value={this.state.department}
+                                            onChange={this.handleChange}
+                                            label="Department"
+                                            variant="outlined" />
+                                        <br />
+                                        <TextField
+                                            error={this.state.errors.semester ? true : false}
+                                            style={component_margin}
+                                            helperText={this.state.errors.semester ? this.state.errors.semester : null}
+                                            className="inputs componentsMargin"
+                                            id="outlined-basic"
+                                            type="text"
+                                            name="semester"
+                                            value={this.state.semester}
+                                            onChange={this.handleChange}
+                                            label="Semester"
+                                            variant="outlined" />
+                                        <br />
+                                        <TextField
+                                            error={this.state.errors.enrollment ? true : false}
+                                            style={component_margin}
+                                            helperText={this.state.errors.enrollment ? this.state.errors.enrollment : null}
+                                            className="inputs componentsMargin"
+                                            id="outlined-basic"
+                                            type="text"
+                                            name="enrollment"
+                                            value={this.state.enrollment}
+                                            onChange={this.handleChange}
+                                            label="Enrollment"
                                             variant="outlined" />
                                         <br />
                                         <Button
