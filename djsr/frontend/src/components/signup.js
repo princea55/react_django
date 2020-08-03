@@ -2,9 +2,9 @@
 import React, { Component } from "react";
 import axiosInstance from "../axiosApi";
 import { h1_style, submit, main_div, component_margin, dropdown, paperContent, main_body } from './style';
-import Paper from '@material-ui/core/Paper';
 
-import { createBrowserHistory } from "history";
+
+
 import MenuItem from '@material-ui/core/MenuItem';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
@@ -36,7 +36,7 @@ class Signup extends Component {
         this.setState({ [event.target.name]: event.target.value });
         if (this.state.password === this.state.confirm_password) {
             this.setState({ invalid_confirm: false })
-        } 
+        }
     }
 
     async handleSubmit(event) {
@@ -57,26 +57,31 @@ class Signup extends Component {
                 this.setState({
                     errors: error.response.data
                 });
+                console.log(error.response.data);
             }
         }
 
 
     }
 
-    
+
     render() {
         return (
-            <div style={main_body}>
-                <Paper elevation={3} style={paperContent}>
-                    <h1 style={h1_style}>Signup</h1>
-                    <div style={main_div}>
+            <div className="container mt-5 shadow p-5 mb-5 bg-white rounded">
+
+                <div className="d-flex justify-content-center">
+                    <h1>Signup</h1><br />
+
+                </div>
+                <div className="d-flex p-4 justify-content-center ">
+                    <div>
 
                         <form onSubmit={this.handleSubmit} noValidate autoComplete="off" >
                             <TextField
                                 error={this.state.errors.username ? true : false}
                                 style={component_margin}
                                 className="inputs componentsMargin"
-                                
+
                                 type="text"
                                 name="username"
                                 FormHelperTextProps={{ color: "red" }}
@@ -92,7 +97,7 @@ class Signup extends Component {
                                 error={this.state.errors.email ? true : false}
                                 style={component_margin}
                                 className="inputs componentsMargin"
-                                
+
                                 type="email"
                                 name="email"
                                 label="Email"
@@ -118,7 +123,7 @@ class Signup extends Component {
                                     <MenuItem value="Student">Student</MenuItem>
                                     <MenuItem value="College">College</MenuItem>
                                     <MenuItem value="Professor">Professor</MenuItem>
-                                    
+
                                 </Select>
                                 <FormHelperText>Select Your type</FormHelperText>
                             </FormControl><br />
@@ -126,7 +131,7 @@ class Signup extends Component {
                                 error={this.state.errors.password ? true : false}
                                 style={component_margin}
                                 className="inputs componentsMargin"
-                                
+
                                 type="password"
                                 name="password"
                                 label="Password"
@@ -141,7 +146,7 @@ class Signup extends Component {
                                 error={this.state.invalid_confirm ? true : false}
                                 style={component_margin}
                                 className="inputs componentsMargin"
-                                
+
                                 type="password"
                                 name="confirm_password"
                                 label="Confirm Password"
@@ -162,7 +167,7 @@ class Signup extends Component {
                              </Button>
                         </form>
                     </div>
-                </Paper>
+                </div>
             </div>
 
 

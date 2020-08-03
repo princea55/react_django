@@ -9,11 +9,11 @@ import {
     warning
 } from "./style";
 
-import Paper from "@material-ui/core/Paper";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from '@material-ui/core/CardMedia'
+import Avatar from '@material-ui/core/Avatar';
 class CollegeDetail extends Component {
     constructor(props) {
         super(props);
@@ -29,7 +29,7 @@ class CollegeDetail extends Component {
             user_type: "",
             semester: "",
             enrollment: "",
-            
+
         };
     }
 
@@ -55,7 +55,7 @@ class CollegeDetail extends Component {
                 semester: current_user_detail.semester,
                 enrollment: current_user_detail.enrollment,
                 role: current_user_detail.role,
-                
+
             });
         }
     }
@@ -63,161 +63,81 @@ class CollegeDetail extends Component {
         if (this.state.islogin) {
             if (this.state.user_type === "Professor") {
                 return (
-                    <div style={main_body}>
-                        <Paper elevation={3} style={paperContent}>
-                            <div>
-                                <div style={main_div}>
+                    <div className="container mt-3">
+                        <div className="card mb-3" >
+                            <div className="row no-gutters">
+                                <div className="col">
+                                    <Avatar style={{ marginTop: "1.5rem", marginLeft: "20rem" }} className="text-capitalize">{this.state.username[0]}</Avatar>
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="card-body">
+                                        <h5 className="card-title text-capitalize font-weight-bolder">{this.state.username}</h5>
+                                    </div>
 
-                                    <Card style={root} variant="outlined">
-                                        <CardContent>
-                                            <Typography
-                                                style={title}
-                                                color="textSecondary"
-                                                gutterBottom
-                                            >
-                                                Username
-                                            </Typography>
-                                            <Typography variant="h5" style={pos} component="h2">
-                                                {this.state.username}
-                                            </Typography>
-
-                                            <Typography color="textSecondary">Email</Typography>
-                                            <Typography variant="body2" style={pos} component="p">
-                                                {this.state.email}
-                                                <br />
-                                            </Typography>
-
-                                            <Typography color="textSecondary">Department</Typography>
-                                            <Typography variant="body2" style={pos} component="p">
-                                                {this.state.department}
-                                                <br />
-                                            </Typography>
-
-                                            <Typography color="textSecondary">Role</Typography>
-                                            <Typography variant="body2" style={pos} scomponent="p">
-                                                {this.state.role}
-                                                <br />
-                                            </Typography>
-                                            <Typography color="textSecondary">College</Typography>
-                                            <Typography variant="body2" style={pos} component="p">
-                                                {this.state.college}
-                                                <br />
-                                            </Typography>
-                                        </CardContent>
-
-                                    </Card>
+                                    <ul className="list-group list-group-flush text-dark">
+                                        <li className="list-group-item"><p className="text-muted">Email </p>{this.state.email}</li>
+                                        <li className="list-group-item"><p className="text-muted">Department </p>{this.state.department}</li>
+                                        <li className="list-group-item"><p className="text-muted">Role </p>{this.state.role}</li>
+                                        <li className="list-group-item"><p className="text-muted">College </p>{this.state.college}</li>
+                                    </ul>
                                 </div>
                             </div>
-                        </Paper>
+
+                        </div>
+
                     </div>
                 );
             } else if (this.state.user_type === "College") {
                 return (
-                    <div style={main_body}>
-                        <Paper elevation={3} style={paperContent}>
-                            <div>
-                                <div style={main_div}>
+                    <div className="container mt-3">
+                        <div className="card mb-3" >
+                            <div className="row no-gutters">
+                                <div className="col">
+                                    <Avatar style={{ marginTop: "1.5rem", marginLeft: "20rem" }} className="text-capitalize">{this.state.username[0]}</Avatar>
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="card-body">
+                                        <h5 className="card-title text-capitalize font-weight-bolder">{this.state.username}</h5>
+                                    </div>
 
-                                    <Card style={root} variant="outlined">
-                                        
-                                        <CardContent>
-                                            <Typography
-                                                style={title}
-                                                color="textSecondary"
-                                                gutterBottom
-                                            >
-                                                Username
-                                            </Typography>
-                                            <Typography variant="h5" style={pos} component="h2">
-                                                {this.state.username}
-                                            </Typography>
-
-                                            <Typography color="textSecondary">Email</Typography>
-                                            <Typography variant="body2" style={pos} component="p">
-                                                {this.state.email}
-                                                <br />
-                                            </Typography>
-
-                                            <Typography color="textSecondary">City</Typography>
-                                            <Typography variant="body2" style={pos} component="p">
-                                                {this.state.city}
-                                                <br />
-                                            </Typography>
-
-                                            <Typography color="textSecondary">College</Typography>
-                                            <Typography variant="body2" style={pos} scomponent="p">
-                                                {this.state.college}
-                                                <br />
-                                            </Typography>
-                                            <Typography color="textSecondary">Phone</Typography>
-                                            <Typography variant="body2" style={pos} scomponent="p">
-                                                {this.state.phone}
-                                                <br />
-                                            </Typography>
-                                        </CardContent>
-
-                                    </Card>
+                                    <ul className="list-group list-group-flush text-dark">
+                                        <li className="list-group-item"><p className="text-muted">Email </p>{this.state.email}</li>
+                                        <li className="list-group-item"><p className="text-muted">City </p>{this.state.city}</li>
+                                        <li className="list-group-item"><p className="text-muted">Phone </p>{this.state.phone}</li>
+                                        <li className="list-group-item"><p className="text-muted">College </p>{this.state.college}</li>
+                                    </ul>
                                 </div>
                             </div>
-                        </Paper>
+                        </div>
                     </div>
                 );
             } else if (this.state.user_type === "Student") {
                 return (
-                    <div style={main_body}>
-                        <Paper elevation={3} style={paperContent}>
-                            <div>
-                                <div style={main_div}>
-                                    
-                                    <Card style={root} variant="outlined">
-                                    
-                                        <CardContent>
-                                            <Typography
-                                                style={title}
-                                                color="textSecondary"
-                                                gutterBottom
-                                            >
-                                                Username
-                                            </Typography>
-                                            <Typography variant="h5" style={pos} component="h2">
-                                                {this.state.username}
-                                            </Typography>
+                    <div className="container mt-3">
+                        <div className="card mb-3" >
+                            <div className="row no-gutters">
+                                <div className="col">
+                                    <Avatar style={{ marginTop: "1.5rem", marginLeft: "20rem" }} className="text-capitalize">{this.state.username[0]}</Avatar>
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="card-body">
+                                        <h5 className="card-title text-capitalize font-weight-bolder">{this.state.username}</h5>
+                                    </div>
 
-                                            <Typography color="textSecondary">Email</Typography>
-                                            <Typography variant="body2" style={pos} component="p">
-                                                {this.state.email}
-                                                <br />
-                                            </Typography>
-
-                                            <Typography color="textSecondary">Enrollment</Typography>
-                                            <Typography variant="body2" style={pos} component="p">
-                                                {this.state.enrollment}
-                                                <br />
-                                            </Typography>
-
-                                            <Typography color="textSecondary">Department</Typography>
-                                            <Typography variant="body2" style={pos} scomponent="p">
-                                                {this.state.department}
-                                                <br />
-                                            </Typography>
-                                            <Typography color="textSecondary">Semester</Typography>
-                                            <Typography variant="body2" style={pos} scomponent="p">
-                                                {this.state.semester}
-                                                <br />
-                                            </Typography>
-                                            <Typography color="textSecondary">College</Typography>
-                                            <Typography variant="body2" style={pos} scomponent="p">
-                                                {this.state.college}
-                                                <br />
-                                            </Typography>
-                                        </CardContent>
-
-                                    </Card>
+                                    <ul className="list-group list-group-flush text-dark">
+                                        <li className="list-group-item"><p className="text-muted">Email </p>{this.state.email}</li>
+                                        <li className="list-group-item"><p className="text-muted">Enrollment </p>{this.state.enrollment}</li>
+                                        <li className="list-group-item"><p className="text-muted">Department </p>{this.state.department}</li>
+                                        <li className="list-group-item"><p className="text-muted">Semester </p>{this.state.semester}</li>
+                                        <li className="list-group-item"><p className="text-muted">College </p>{this.state.college}</li>
+                                    </ul>
                                 </div>
                             </div>
-                        </Paper>
+
+                        </div>
+
                     </div>
-                );
+                )
             }
 
         } else {

@@ -24,10 +24,12 @@ urlpatterns = [
     path('professor/update/<int:pk>/', UpdateProfessor.as_view()),
     path('professor/delete/<int:pk>/', DestroyProfessor.as_view()),
     path('professorlist/', ListProfessors.as_view()),
-
+    # Students
     path('students/', CreateStudent.as_view()),
     path('student/detail/<int:pk>/', DetailStudent.as_view()),
     path('student/update/<int:pk>/',UpdateStudent.as_view()),
     path('student/delete/<int:pk>/', DestroyStudent.as_view()),
     path('studentlist/',ListStudents.as_view()),
+    # Attendance
+    path('attendancelist/',ListAttendance.as_view()),
 ]

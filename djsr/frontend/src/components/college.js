@@ -34,7 +34,7 @@ class Hello extends Component {
             islogin: false,
             current_user_detail: "",
             role: "",
-            
+
             collagelist: ["GOVERNMENT ENGINEERING COLLEGE, BHARUCH",
                 "GOVERNMENT ENGINEERING COLLEGE,BHAVNAGAR",
                 "GOVERNMENT ENGINEERING COLLEGE, BHUJ",
@@ -168,7 +168,7 @@ class Hello extends Component {
                 role: current_user_detail.role,
                 enrollment: current_user_detail.enrollment,
                 semester: current_user_detail.semester,
-                
+
             });
         }
 
@@ -178,87 +178,91 @@ class Hello extends Component {
         if (this.state.islogin) {
             if (this.state.user_type === "College") {
                 return (
-                    <div style={main_body}>
-                        <Paper elevation={3} style={paperContent}>
-                            <div >
-                                {this.state.errors ? this.state.errors.detail : null}
-                                <div style={main_div}>
+                    <div className="container mt-5 shadow p-5 mb-5 bg-white rounded">
+                        <div className="d-flex justify-content-center">
 
-                                    <form onSubmit={this.handleSubmitWThen} noValidate autoComplete="off">
-                                        <FormControl required
-                                            style={{
-                                                margin: "5px",
-                                                width: "27rem",
-                                            }}
+                            <h5 className="text-danger">{this.state.errors ? this.state.errors.detail : null}</h5><br />
+                        </div>
+                        <div className="d-flex p-4 justify-content-center ">
+                            
+                            <div>
+
+                                <form onSubmit={this.handleSubmitWThen} noValidate autoComplete="off">
+                                    <FormControl required
+                                        style={{
+                                            margin: "5px",
+                                            width: "27rem",
+                                        }}
+                                    >
+                                        <Select
+                                            labelId="demo-simple-select-required-label"
+                                            id="demo-simple-select-required"
+                                            name="college"
+                                            value={this.state.college}
+                                            onChange={this.handleChange}
+                                            className="componentsMargin"
                                         >
-                                            <Select
-                                                labelId="demo-simple-select-required-label"
-                                                id="demo-simple-select-required"
-                                                name="college"
-                                                value={this.state.college}
-                                                onChange={this.handleChange}
-                                                className="componentsMargin"
-                                            >
-                                                <MenuItem value="">
-                                                    <em>None</em>
+                                            <MenuItem value="">
+                                                <em>None</em>
+                                            </MenuItem>
+                                            {this.state.collagelist.map(i =>
+                                                <MenuItem value={i} key={uuid()}>
+                                                    {i}
                                                 </MenuItem>
-                                                {this.state.collagelist.map(i =>
-                                                    <MenuItem value={i} key={uuid()}>
-                                                        {i}
-                                                    </MenuItem>
-                                                )}
-                                            </Select>
-                                            <FormHelperText>Select Your College</FormHelperText>
-                                        </FormControl><br />
-                                        <TextField
-                                            error={this.state.errors.phone ? true : false}
-                                            style={component_margin}
-                                            className="inputs componentsMargin"
-                                            id="outlined-basic"
-                                            helperText={this.state.errors.phone ? this.state.errors.phone : null}
-                                            type="number"
-                                            name="phone"
-                                            value={this.state.phone}
-                                            onChange={this.handleChange}
-                                            label="Phone"
-                                            variant="outlined" />
+                                            )}
+                                        </Select>
+                                        <FormHelperText>Select Your College</FormHelperText>
+                                    </FormControl><br />
+                                    <TextField
+                                        error={this.state.errors.phone ? true : false}
+                                        style={component_margin}
+                                        className="inputs componentsMargin"
+                                        id="outlined-basic"
+                                        helperText={this.state.errors.phone ? this.state.errors.phone : null}
+                                        type="number"
+                                        name="phone"
+                                        value={this.state.phone}
+                                        onChange={this.handleChange}
+                                        label="Phone"
+                                        variant="outlined" />
 
-                                        <br />
-                                        <TextField
-                                            error={this.state.errors.city ? true : false}
-                                            style={component_margin}
-                                            helperText={this.state.errors.city ? this.state.errors.city : null}
-                                            className="inputs componentsMargin"
-                                            id="outlined-basic"
-                                            type="text"
-                                            name="city"
-                                            value={this.state.city}
-                                            onChange={this.handleChange}
-                                            label="City"
-                                            variant="outlined" />
-                                        <br />
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            style={submit}
-                                            type="submit"
-                                        >
-                                            Update
+                                    <br />
+                                    <TextField
+                                        error={this.state.errors.city ? true : false}
+                                        style={component_margin}
+                                        helperText={this.state.errors.city ? this.state.errors.city : null}
+                                        className="inputs componentsMargin"
+                                        id="outlined-basic"
+                                        type="text"
+                                        name="city"
+                                        value={this.state.city}
+                                        onChange={this.handleChange}
+                                        label="City"
+                                        variant="outlined" />
+                                    <br />
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        style={submit}
+                                        type="submit"
+                                    >
+                                        Update
                                      </Button>
-                                    </form>
-                                </div>
+                                </form>
                             </div>
-                        </Paper>
+                        </div>
+
                     </div>
                 )
             } else if (this.state.user_type === "Professor") {
                 return (
-                    <div style={main_body}>
-                        <Paper elevation={3} style={paperContent}>
-                            <div >
-                                {this.state.errors ? this.state.errors.detail : null}
-                                <div style={main_div}>
+                    <div className="container mt-5 shadow p-5 mb-5 bg-white rounded">
+                        <div className="d-flex justify-content-center">
 
+                            <h5 className="text-danger">{this.state.errors ? this.state.errors.detail : null}</h5><br />
+                        </div>
+                        <div className="d-flex p-4 justify-content-center ">
+                        <div>
                                     <form onSubmit={this.handleSubmitWThen} noValidate autoComplete="off">
 
                                         <FormControl required
@@ -331,16 +335,18 @@ class Hello extends Component {
                                     </form>
                                 </div>
                             </div>
-                        </Paper>
-                    </div>
+                        </div>
+                   
                 )
             } else if (this.state.user_type === "Student") {
                 return (
-                    <div style={main_body}>
-                        <Paper elevation={3} style={paperContent}>
-                            <div >
-                                {this.state.errors ? this.state.errors.detail : null}
-                                <div style={main_div}>
+                    <div className="container mt-5 shadow p-5 mb-5 bg-white rounded">
+                    <div className="d-flex justify-content-center">
+
+                        <h5 className="text-danger">{this.state.errors ? this.state.errors.detail : null}</h5><br />
+                    </div>
+                    <div className="d-flex p-4 justify-content-center ">
+                    <div>
                                     <form onSubmit={this.handleSubmitWThen} noValidate autoComplete="off">
                                         <FormControl required
                                             style={{
@@ -418,7 +424,6 @@ class Hello extends Component {
                                     </form>
                                 </div>
                             </div>
-                        </Paper>
                     </div>
                 )
             }

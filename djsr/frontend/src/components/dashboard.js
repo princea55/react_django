@@ -13,7 +13,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Button from '@material-ui/core/Button';
+
 
 import Login from "./login";
 import Signup from "./signup";
@@ -22,6 +22,9 @@ import Logout from "./Logout";
 import CollegeDetail from './collegeDetail';
 import ProfessorList from './ProfessorList';
 import StudentList from './StudentList';
+import Student_search from './Student_search';
+import Student_detail from './Student_detail';
+import Professor_search from './Professor_search';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -49,8 +52,8 @@ const styles = theme => ({
         zIndex: theme.zIndex.drawer + 1
     },
     bodyContent: {
-        height: "100%",
-        backgroundColor: "#cfd6d7"
+        height: "100%"
+        
     }
 });
 
@@ -156,6 +159,12 @@ const MyDrawer = withStyles(styles)(
                     <ListItem button component={Link} to="/students_list/" onClick={onItemClick('StudentsList')}>
                         <ListItemText>Students List</ListItemText>
                     </ListItem>
+                    <ListItem button component={Link} to="/professors_search/" onClick={onItemClick('Professors Search')}>
+                        <ListItemText>Professors Search</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/students_search/" onClick={onItemClick('Students Search')}>
+                        <ListItemText>Students Search</ListItemText>
+                    </ListItem>
                     <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
                         <ListItemText>Logout</ListItemText>
                     </ListItem>
@@ -216,6 +225,21 @@ const MyDrawer = withStyles(styles)(
                         exact
                         path="/students_list/"
                         render={(routeprops) => <StudentList  {...routeprops} />}
+                    />
+                    <Route
+                        exact
+                        path="/professors_search/"
+                        render={(routeprops) => <Professor_search  {...routeprops} />}
+                    />
+                    <Route
+                        exact
+                        path="/students_search/"
+                        render={(routeprops) => <Student_search  {...routeprops} />}
+                    />
+                    <Route
+                        exact
+                        path="/student_profile/"
+                        render={(routeprops) => <Student_detail  {...routeprops} />}
                     />
                     
                     <Route

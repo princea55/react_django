@@ -6,13 +6,13 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import MyTokenObtainPairSerializer, CustomUserSerializer,Collegeserializer,Studentserializer,Professorserializer
+from .serializers import MyTokenObtainPairSerializer,Attendanceserializer, CustomUserSerializer,Collegeserializer,Studentserializer,Professorserializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsProfessor,IsCollege,IsStudent
 from rest_framework import generics,filters
-from .models import CustomUser,Students,Professors,College
+from .models import CustomUser,Students,Professors,College,Attendance
 from rest_framework import filters
-
+from authentication.search import DynamicSearchFilter
 
 class ObtainTokenPairWithColorView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
@@ -24,7 +24,18 @@ class CustomUserCreate(APIView):
 
     def post(self, request, format='json'):
         serializer = CustomUserSerializer(data=request.data)
+        
         if serializer.is_valid():
+            print(serializer.validated_data.get('user_type'))
+            print(serializer.validated_data)
+            # if serializer.validated_data.get('user_type')=='Student' or serializer.validated_data.get('user_type')=='Professor':
+            #     serializer.validated_data.get('is_active')=False
+            #     print(serializer.validated_data.get('is_active'))
+            # else:
+            #     serializer.validated_data.get('is_active')=True
+            #     print(serializer.validated_data.get('is_active'))
+
+
             user = serializer.save()
             if user:
                 json = serializer.data
@@ -108,15 +119,15 @@ class DetailProfessor(generics.RetrieveAPIView):
 class UpdateProfessor(generics.UpdateAPIView):
     queryset = Professors.objects.all()
     serializer_class = Professorserializer
-    permission_classes = [IsProfessor]
+    permission_classes = [IsProfessor|IsCollege]
 
 class DestroyProfessor(generics.DestroyAPIView):
     queryset = Professors.objects.all()
     serializer_class = Professorserializer
-    permission_classes = [IsProfessor,IsCollege]
+    permission_classes = [IsCollege|IsProfessor]
 
 class ListProfessors(generics.ListAPIView):
-    search_fields = ['=department', '=role','=user__username','college']
+    search_fields = ['department', 'role','user__username','college']
     filter_backends = (filters.SearchFilter,)
     queryset = Professors.objects.all()
     serializer_class = Professorserializer
@@ -134,7 +145,7 @@ class CreateStudent(generics.CreateAPIView):
 class DetailStudent(generics.RetrieveAPIView):
     queryset = Students.objects.all()
     serializer_class = Studentserializer
-    permission_classes = [IsStudent]
+    permission_classes = [IsStudent|IsCollege|IsProfessor]
 
 class UpdateStudent(generics.UpdateAPIView):
     queryset = Students.objects.all()
@@ -144,11 +155,27 @@ class UpdateStudent(generics.UpdateAPIView):
 class DestroyStudent(generics.DestroyAPIView):
     queryset = Students.objects.all()
     serializer_class = Studentserializer
-    permission_classes = [IsProfessor,IsCollege]
+    permission_classes = [IsCollege|IsProfessor]
 
 class ListStudents(generics.ListAPIView):
-    search_fields = ['=user__username', '=semester', '=enrollment', 'department', 'college']
+    search_fields = ['user__username', '=semester', '=enrollment', 'department','college']
     filter_backends = (filters.SearchFilter,)
     queryset = Students.objects.all()
     serializer_class = Studentserializer
+    permission_classes = [permissions.AllowAny,]
+
+
+# Attendanceserializer View
+
+class ListAttendance(generics.ListCreateAPIView):
+    search_fields = ['username','=enrollment','created_date']
+    filter_backends = (filters.SearchFilter,)
+    queryset = Attendance.objects.all()
+    serializer_class = Attendanceserializer
+    permission_classes = [permissions.AllowAny,]
+
+
+class DetailAttendance(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Attendance.objects.all()
+    serializer_class = Attendanceserializer
     permission_classes = [permissions.AllowAny,]

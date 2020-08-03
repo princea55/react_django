@@ -1,6 +1,6 @@
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
+
 
 import React, { Component } from "react";
 import axiosInstance from "../axiosApi";
@@ -94,51 +94,63 @@ class Login extends Component {
 
 
         return (
-            <div style={main_body}>
-                <Paper elevation={3} style={paperContent}>
-                    <div >
-                        <h1 style={h1_style}>Login</h1>
-                        <h5 style={alert}>{this.state.errors ? this.state.errors.detail : null}</h5>
-                        <div style={main_div}>
+            <div className="container mt-5 shadow p-5 mb-5 bg-white rounded">
+                <div className="d-flex justify-content-center">
+                    <h1>Login</h1><br />
 
-                            <form onSubmit={this.handleSubmitWThen} noValidate autoComplete="off">
-                                <TextField
-                                    style={component_margin}
-                                    className="inputs componentsMargin"
-
-                                    type="text"
-                                    name="username"
-                                    value={this.state.username}
-                                    onChange={this.handleChange}
-                                    label="Username"
-                                    variant="outlined" />
-                                {/* {this.state.errors.username ? this.state.errors.username : null} */}
-                                <br />
-                                <TextField
-                                    style={component_margin}
-                                    className="inputs componentsMargin"
-
-                                    type="password"
-                                    name="password"
-                                    label="Password"
-                                    variant="outlined"
-                                    value={this.state.password}
-                                    onChange={this.handleChange} />
-                                {/* {this.state.errors.password ? this.state.errors.password : null} */}
-                                <br />
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    style={submit}
-                                    type="submit"
-                                >
-                                    Login
-                    </Button>
-                            </form>
-
+                </div>
+                <div className="d-flex justify-content-center">
+                    {this.state.errors.detail ? (
+                        <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Error: </strong>{this.state.errors.detail}
+                            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
+                    ) : (null)}
+                </div>
+                <div className="d-flex p-4 justify-content-center ">
+
+                    <div >
+
+                        <form onSubmit={this.handleSubmitWThen} noValidate autoComplete="off">
+                            <TextField
+                                style={component_margin}
+                                className="inputs componentsMargin"
+
+                                type="text"
+                                name="username"
+                                value={this.state.username}
+                                onChange={this.handleChange}
+                                label="Username"
+                                variant="outlined" />
+                            {/* {this.state.errors.username ? this.state.errors.username : null} */}
+                            <br />
+                            <TextField
+                                style={component_margin}
+                                className="inputs componentsMargin"
+
+                                type="password"
+                                name="password"
+                                label="Password"
+                                variant="outlined"
+                                value={this.state.password}
+                                onChange={this.handleChange} />
+                            {/* {this.state.errors.password ? this.state.errors.password : null} */}
+                            <br />
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                style={submit}
+                                type="submit"
+                            >
+                                Login
+                    </Button>
+                        </form>
+
                     </div>
-                </Paper>
+                </div>
+
             </div>
         )
     }

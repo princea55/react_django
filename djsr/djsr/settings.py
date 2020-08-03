@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'frontend',
     'phonenumber_field',
     'rest_framework_simplejwt.token_blacklist',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -140,7 +139,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
 'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),  #
+    ),  
+    
 }
 from datetime import timedelta
 
