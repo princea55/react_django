@@ -276,6 +276,7 @@ class Professors(models.Model):
     department = models.CharField(max_length=100, blank=False)
     role = models.CharField(
         max_length=20, choices=Professors_ROLE, default='Professor')
+    is_approve = models.BooleanField(default=False)
     objects = models.Manager()
 
     def __str__(self):
@@ -289,6 +290,7 @@ class Students(models.Model):
     enrollment = models.CharField(max_length=50, blank=False, unique=True)
     semester = models.CharField(max_length=5, blank=False)
     department = models.CharField(max_length=50, blank=False)
+    is_approve = models.BooleanField(default=False)
     objects = models.Manager()
 
     def __str__(self):

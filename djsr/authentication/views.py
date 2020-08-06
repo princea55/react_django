@@ -26,16 +26,6 @@ class CustomUserCreate(APIView):
         serializer = CustomUserSerializer(data=request.data)
         
         if serializer.is_valid():
-            print(serializer.validated_data.get('user_type'))
-            print(serializer.validated_data)
-            # if serializer.validated_data.get('user_type')=='Student' or serializer.validated_data.get('user_type')=='Professor':
-            #     serializer.validated_data.get('is_active')=False
-            #     print(serializer.validated_data.get('is_active'))
-            # else:
-            #     serializer.validated_data.get('is_active')=True
-            #     print(serializer.validated_data.get('is_active'))
-
-
             user = serializer.save()
             if user:
                 json = serializer.data
@@ -74,6 +64,15 @@ class DestroyCustomUser(generics.DestroyAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
     permission_classes = [permissions.AllowAny,]
+
+class ListCustomUser(generics.ListAPIView):
+    search_fields = ['college']
+    filter_backends = (filters.SearchFilter,)
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
+    permission_classes = [permissions.AllowAny,]
+
+
  #------------------------------------College
 class CreateCollege(generics.CreateAPIView):
     queryset = Students.objects.all()
@@ -127,7 +126,7 @@ class DestroyProfessor(generics.DestroyAPIView):
     permission_classes = [IsCollege|IsProfessor]
 
 class ListProfessors(generics.ListAPIView):
-    search_fields = ['department', 'role','user__username','college']
+    search_fields = ['department', 'role','user__username','college','is_approve']
     filter_backends = (filters.SearchFilter,)
     queryset = Professors.objects.all()
     serializer_class = Professorserializer
@@ -150,7 +149,7 @@ class DetailStudent(generics.RetrieveAPIView):
 class UpdateStudent(generics.UpdateAPIView):
     queryset = Students.objects.all()
     serializer_class = Studentserializer
-    permission_classes = [IsStudent]
+    permission_classes = [IsStudent|IsProfessor]
 
 class DestroyStudent(generics.DestroyAPIView):
     queryset = Students.objects.all()
@@ -158,7 +157,7 @@ class DestroyStudent(generics.DestroyAPIView):
     permission_classes = [IsCollege|IsProfessor]
 
 class ListStudents(generics.ListAPIView):
-    search_fields = ['user__username', '=semester', '=enrollment', 'department','college']
+    search_fields = ['user__username', '=semester', '=enrollment', 'department','college','is_approve']
     filter_backends = (filters.SearchFilter,)
     queryset = Students.objects.all()
     serializer_class = Studentserializer

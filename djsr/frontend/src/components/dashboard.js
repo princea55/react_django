@@ -53,7 +53,7 @@ const styles = theme => ({
     },
     bodyContent: {
         height: "100%"
-        
+
     }
 });
 
@@ -70,13 +70,6 @@ const MyToolbar = withStyles(styles)(
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Typography
-                        variant="h6"
-                        color="inherit"
-                        className={classes.flex}
-                    >
-                        {title}
-                    </Typography>
                 </Toolbar>
 
             </AppBar>
@@ -106,7 +99,7 @@ const OnlyLoginSignup = withStyles(styles)(
                     <ListItem button component={Link} to="/signup/" onClick={onItemClick('Signup')}>
                         <ListItemText>Signup</ListItemText>
                     </ListItem>
-                    
+
                 </List>
             </Drawer>
             <div>
@@ -126,15 +119,17 @@ const OnlyLoginSignup = withStyles(styles)(
                         path="/profile/"
                         render={(routeprops) => <CollegeDetail  {...routeprops} />}
                     />
-                    
+
                 </main>
             </div>
         </Router>
     )
 );
 
+
+
 const MyDrawer = withStyles(styles)(
-    ({ classes, variant, open, onClose, onItemClick, user_type}) => (
+    ({ classes, variant, open, onClose, onItemClick, user_type }) => (
         <Router history={history}>
             <Drawer variant={variant} open={open} onClose={onClose}
                 classes={{
@@ -146,7 +141,28 @@ const MyDrawer = withStyles(styles)(
                         [classes.toolbarMargin]: variant === 'persistent'
                     })}
                 />
-                {user_type === 'College'?( <List>
+                {user_type === 'College' ? (<List>
+                    <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>
+                        <ListItemText>Profile</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/select_college/" onClick={onItemClick('College')}>
+                        <ListItemText>Select College</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/professors_list/" onClick={onItemClick('ProfessorsList')}>
+                        <ListItemText>Professors List</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/professors_search/" onClick={onItemClick('Professors Search')}>
+                        <ListItemText>Professors Search</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/students_search/" onClick={onItemClick('Students Search')}>
+                        <ListItemText>Students Search</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
+                        <ListItemText>Logout</ListItemText>
+                    </ListItem>
+                </List>) : (null)}
+
+                {user_type === 'Professor' ? (<List>
                     <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>
                         <ListItemText>Profile</ListItemText>
                     </ListItem>
@@ -159,31 +175,13 @@ const MyDrawer = withStyles(styles)(
                     <ListItem button component={Link} to="/students_list/" onClick={onItemClick('StudentsList')}>
                         <ListItemText>Students List</ListItemText>
                     </ListItem>
-                    <ListItem button component={Link} to="/professors_search/" onClick={onItemClick('Professors Search')}>
-                        <ListItemText>Professors Search</ListItemText>
-                    </ListItem>
-                    <ListItem button component={Link} to="/students_search/" onClick={onItemClick('Students Search')}>
-                        <ListItemText>Students Search</ListItemText>
-                    </ListItem>
                     <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
                         <ListItemText>Logout</ListItemText>
                     </ListItem>
-                </List>):(null)}
-                {user_type === 'Professor'?( <List>
-                    <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>
-                        <ListItemText>Profile</ListItemText>
-                    </ListItem>
-                    <ListItem button component={Link} to="/select_college/" onClick={onItemClick('College')}>
-                        <ListItemText>Select College</ListItemText>
-                    </ListItem>
-                    <ListItem button component={Link} to="/students_list/" onClick={onItemClick('StudentsList')}>
-                        <ListItemText>Students List</ListItemText>
-                    </ListItem>
-                    <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
-                        <ListItemText>Logout</ListItemText>
-                    </ListItem>
-                </List>):(null)}
-                {user_type === 'Student'?( <List>
+                </List>) : (null)}
+
+
+                {user_type === 'Student' ? (<List>
                     <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>
                         <ListItemText>Profile</ListItemText>
                     </ListItem>
@@ -193,9 +191,9 @@ const MyDrawer = withStyles(styles)(
                     <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
                         <ListItemText>Logout</ListItemText>
                     </ListItem>
-                </List>):(null)}
-                
-               
+                </List>) : (null)}
+
+
             </Drawer>
             <div>
 
@@ -241,7 +239,7 @@ const MyDrawer = withStyles(styles)(
                         path="/student_profile/"
                         render={(routeprops) => <Student_detail  {...routeprops} />}
                     />
-                    
+
                     <Route
                         exact
                         path="/college/"
@@ -258,6 +256,7 @@ const MyDrawer = withStyles(styles)(
         </Router>
     )
 );
+
 function AppBarInteraction({ classes, variant }) {
     const [drawer, setDrawer] = useState(false);
     const [title, setTitle] = useState('Appbar');
@@ -271,8 +270,8 @@ function AppBarInteraction({ classes, variant }) {
         setDrawer(variant === 'temporary' ? drawer : false);
         setDrawer(!drawer);
     };
+
     const current_user = JSON.parse(localStorage.getItem("current_user"));
-    
     if (localStorage.getItem("islogin")) {
         return (
             <div className={classes.bodyContent}>
@@ -282,7 +281,8 @@ function AppBarInteraction({ classes, variant }) {
                         open={drawer}
                         onClose={toggleDrawer}
                         onItemClick={onItemClick}
-                        user_type = {current_user.user_type}
+                        user_type={current_user.user_type}
+
                         variant={variant}
                     />
                 </div>

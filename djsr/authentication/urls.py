@@ -11,6 +11,7 @@ urlpatterns = [
     path('user/update/<int:pk>', CustomUserUpdate.as_view(), name='update'),
     path('user/delete/<int:pk>', DestroyCustomUser.as_view(), name='delete'),
     path('blacklist/', LogoutAndBlacklistRefreshTokenForUserView.as_view(), name='blacklist'),
+    path('customuserlist/', ListCustomUser.as_view()),
 
     path('college/', CreateCollege.as_view()),
     # path('college/detail/<int:pk>/', DetailCollege.as_view()),

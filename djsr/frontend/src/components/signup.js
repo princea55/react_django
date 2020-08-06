@@ -25,6 +25,7 @@ class Signup extends Component {
             confirm_password: "",
             errors: {},
             invalid_confirm: false,
+            
 
         };
 
@@ -57,7 +58,6 @@ class Signup extends Component {
                 this.setState({
                     errors: error.response.data
                 });
-                console.log(error.response.data);
             }
         }
 

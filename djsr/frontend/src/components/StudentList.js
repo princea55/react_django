@@ -11,18 +11,22 @@ export default class ProfessorList extends Component {
             islogin: "",
             invalid_college: "",
             student_list: "",
-            college_serach_name: "",
-            user_type: ""
+            college_search_name: "",
+            department_search_name: "",
+            user_type: "",
+            approve:"False",
+            check_approve:""
         };
         this.record_list = this.record_list.bind(this);
+        this.approve_record = this.approve_record.bind(this);
         this.delete_record = this.delete_record.bind(this);
 
     }
-    async record_list(college_serach) {
+    async record_list(college_serach,department_search) {
         const header = localStorage.getItem("access_token");
         let students;
         try {
-            students = await axiosInstance.get(`/studentlist/?search=${college_serach}`, { headers: { "Authorization": `Token ${header}` } });
+            students = await axiosInstance.get(`/studentlist/?search=${college_serach}+${department_search}+${this.state.approve}`, { headers: { "Authorization": `Token ${header}` } });
             this.setState({
                 student_list: students.data
             });
@@ -30,6 +34,19 @@ export default class ProfessorList extends Component {
             console.log(error);
         }
 
+    }
+    async approve_record(id) {
+        const header = localStorage.getItem("access_token");
+        let students;
+        try {
+            students = await axiosInstance.patch(`student/update/${id}/`, {
+                is_approve:"True"
+            }, { headers: { "Authorization": `JWT ${header}` } });
+
+        } catch (error) {
+            console.log(error);
+        }
+        this.record_list(this.state.college_search_name,this.state.department_search_name);
     }
     async delete_record(id) {
         const header = localStorage.getItem("access_token");
@@ -41,10 +58,10 @@ export default class ProfessorList extends Component {
         } catch (error) {
             console.log(error);
         }
-        this.record_list(this.state.college_serach_name);
+        this.record_list(this.state.college_search_name,this.state.department_search_name);
     }
     componentDidMount() {
-        let college_serach
+        let college_serach,department_search;
         this.setState({ islogin: true });
         const current_user = JSON.parse(localStorage.getItem("current_user"))
         this.setState({
@@ -54,18 +71,21 @@ export default class ProfessorList extends Component {
             const current_user_detail = JSON.parse(
                 localStorage.getItem("current_user_detail")
             );
-            college_serach = current_user_detail.college
+            college_serach = current_user_detail.college;
+            department_search = current_user_detail.department;
             this.setState({
-                college_serach_name: college_serach
+                college_search_name: college_serach,
+                department_search_name: department_search,
+                check_approve:current_user_detail.is_approve
             });
 
         } else {
             this.setState({ invalid_college: true })
         }
-        this.record_list(college_serach);
+        this.record_list(college_serach,department_search);
     }
     render() {
-        if (this.state.user_type === 'College' || this.state.user_type === 'Professor') {
+        if ((this.state.user_type === 'College' && this.state.check_approve === true) || (this.state.user_type === 'Professor'&& this.state.check_approve === true)) {
             return (
                 <div className="container">
 
@@ -100,6 +120,16 @@ export default class ProfessorList extends Component {
                                                 color="secondary"
                                                 type="button"
                                                 className="btn btn-danger"
+                                                onClick={() => this.approve_record(this.state.student_list[item].id)}
+                                                
+                                            >
+                                                Approve
+                                            </Button></td>
+                                            <td><Button
+                                                variant="contained"
+                                                color="secondary"
+                                                type="button"
+                                                className="btn btn-danger"
                                                 onClick={() => this.delete_record(this.state.student_list[item].id)}
                                                 startIcon={<DeleteIcon />}
                                             >
@@ -118,7 +148,7 @@ export default class ProfessorList extends Component {
                 <div className="container mt-5">
                     <div className="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>Warning: </strong>You're not authorized to access this page!
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>

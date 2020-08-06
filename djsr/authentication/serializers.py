@@ -35,13 +35,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
         instance = self.Meta.model(**validated_data)  # as long as the fields are the same, we can just use this
         
         if instance is not None:
-            print("in serializer",getattr(instance, 'is_active'))
             instance.set_password(password)
-            if getattr(instance, 'user_type') == 'College':
-                pass
-            else:
-                instance.is_active=False
-            # instance.is_active = False
         instance.save()
         return instance
 
@@ -58,11 +52,11 @@ class Professorserializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     username = serializers.CharField(source='user.username', read_only=True)
     email = serializers.CharField(source='user.email', read_only=True)
-    is_active = serializers.CharField(source='user.is_active', read_only=True)
+    
     
     class Meta:
         model = Professors
-        fields = ['id','user','college','department','role','user_id','username','email','is_active']
+        fields = ['id','user','college','department','role','user_id','username','email','is_approve']
 
 class Studentserializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
@@ -71,7 +65,7 @@ class Studentserializer(serializers.ModelSerializer):
 
     class Meta:
         model = Students
-        fields = ['id','college','enrollment','semester','department','user','user_id','username','email']
+        fields = ['id','college','enrollment','semester','department','user','user_id','username','email','is_approve']
 
 
 class Attendanceserializer(serializers.ModelSerializer):
