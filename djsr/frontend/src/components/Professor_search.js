@@ -4,6 +4,7 @@ import axiosInstance from "../axiosApi";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Footer from './footer/footer';
 
 export default class Professor_search extends Component {
     constructor(props) {
@@ -72,99 +73,102 @@ export default class Professor_search extends Component {
     }
     render() {
         return (
-            <div className="container mt-5">
-                {/* serach bar */}
-                <div className="my-4 p-3">
-                    <form onSubmit={this.handleSubmit} noValidate autoComplete="off" >
-                        <div className="row ">
-                            <div className="col-sm">
-                                <div className="input-group mb-3">
-                                    <TextField
-                                        type="text"
-                                        className="form-control mb-3"
-                                        name="username"
-                                        value={this.state.username}
-                                        onChange={this.handleChange}
-                                        label="Username"
-                                        variant="outlined" />
+            <div>
+                <div className="container my-5 pb-5">
+                    {/* serach bar */}
+                    <div className="my-4 p-3">
+                        <form onSubmit={this.handleSubmit} noValidate autoComplete="off" >
+                            <div className="row ">
+                                <div className="col-sm">
+                                    <div className="input-group mb-3">
+                                        <TextField
+                                            type="text"
+                                            className="form-control mb-3"
+                                            name="username"
+                                            value={this.state.username}
+                                            onChange={this.handleChange}
+                                            label="Username"
+                                            variant="outlined" />
+                                    </div>
+                                </div>
+                                <div className="col-sm ">
+                                    <div className="input-group mb-3">
+                                        <TextField
+                                            type="text"
+                                            className="form-control mb-3"
+                                            name="role"
+                                            value={this.state.role}
+                                            onChange={this.handleChange}
+                                            label="Role"
+                                            variant="outlined" />
+                                    </div>
                                 </div>
                             </div>
-                            <div className="col-sm ">
-                                <div className="input-group mb-3">
-                                    <TextField
-                                        type="text"
-                                        className="form-control mb-3"
-                                        name="role"
-                                        value={this.state.role}
-                                        onChange={this.handleChange}
-                                        label="Role"
-                                        variant="outlined" />
+                            <div className="row">
+                                <div className="col">
+                                    <div className="input-group mb-3">
+                                        <TextField
+                                            type="text"
+                                            className="form-control mb-3"
+                                            name="department"
+                                            value={this.state.department}
+                                            onChange={this.handleChange}
+                                            label="Department"
+                                            variant="outlined" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <div className="input-group mb-3">
-                                    <TextField
-                                        type="text"
-                                        className="form-control mb-3"
-                                        name="department"
-                                        value={this.state.department}
-                                        onChange={this.handleChange}
-                                        label="Department"
-                                        variant="outlined" />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <div className="input-group mb-3">
-                                    <Button
-                                        variant="contained"
-                                        color="primary"
-                                        className="form-control"
-                                        type="submit"
-                                    >
-                                        Search
+                            <div className="row">
+                                <div className="col">
+                                    <div className="input-group mb-3">
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            className="form-control"
+                                            type="submit"
+                                        >
+                                            Search
                                     </Button>
-                                    {/* <button type="submit" className="btn btn-outline-primary btn-lg form-control">Search</button> */}
+                                        {/* <button type="submit" className="btn btn-outline-primary btn-lg form-control">Search</button> */}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
 
-                {/* show list of students */}
-                <div className="row row-cols-1 row-cols-md-3 justify-content-center">
-                    {
-                        Object.keys(this.state.professors_list).map((item, i) => (
-                            <div className="card mx-4 my-2  shadow bg-white rounded" style={{ width: "20rem" }} key={i}>
-                                <div className="card-body" >
-                                    <h3 className="card-title text-capitalize">{this.state.professors_list[item].username}</h3>
-                                </div>
-                                <ul className="list-group list-group-flush text-dark">
-                                    <li className="list-group-item"><p className="text-muted">Role </p>{this.state.professors_list[item].role}</li>
-                                    <li className="list-group-item"><p className="text-muted">Department </p>{this.state.professors_list[item].department}</li>
-                                    <li className="list-group-item"><p className="text-muted">Email </p>{this.state.professors_list[item].email}</li>
-                                </ul>
-                                <div className="card-footer">
+                    {/* show list of students */}
+                    <div className="row row-cols-1 row-cols-md-3 justify-content-center">
+                        {
+                            Object.keys(this.state.professors_list).map((item, i) => (
+                                <div className="card mx-4 my-2  shadow bg-white rounded" style={{ width: "20rem" }} key={i}>
+                                    <div className="card-body" >
+                                        <h3 className="card-title text-capitalize">{this.state.professors_list[item].username}</h3>
+                                    </div>
+                                    <ul className="list-group list-group-flush text-dark">
+                                        <li className="list-group-item"><p className="text-muted">Role </p>{this.state.professors_list[item].role}</li>
+                                        <li className="list-group-item"><p className="text-muted">Department </p>{this.state.professors_list[item].department}</li>
+                                        <li className="list-group-item"><p className="text-muted">Email </p>{this.state.professors_list[item].email}</li>
+                                    </ul>
+                                    <div className="card-footer">
 
-                                    <Button
-                                        variant="contained"
-                                        color="secondary"
-                                        type="button"
-                                        className="btn btn-danger"
-                                        onClick={() => this.delete_record(this.state.professors_list[item].id)}
-                                        startIcon={<DeleteIcon />}
-                                    >
-                                        Delete
+                                        <Button
+                                            variant="contained"
+                                            color="secondary"
+                                            type="button"
+                                            className="btn btn-danger"
+                                            onClick={() => this.delete_record(this.state.professors_list[item].id)}
+                                            startIcon={<DeleteIcon />}
+                                        >
+                                            Delete
                                     </Button>
-                                    {/* <a href="#" className="card-link">Another link</a> */}
+                                        {/* <a href="#" className="card-link">Another link</a> */}
+                                    </div>
                                 </div>
-                            </div>
-                        ))
-                    }
+                            ))
+                        }
+                    </div>
                 </div>
+                <Footer />
             </div>
 
         )

@@ -75,3 +75,7 @@ class Attendanceserializer(serializers.ModelSerializer):
 
 
 
+class Contactserializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = ['id','email','message']

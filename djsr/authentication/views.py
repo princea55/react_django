@@ -6,11 +6,11 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import MyTokenObtainPairSerializer,Attendanceserializer, CustomUserSerializer,Collegeserializer,Studentserializer,Professorserializer
+from .serializers import MyTokenObtainPairSerializer,Attendanceserializer,CustomUserSerializer,Collegeserializer,Studentserializer,Professorserializer, Contactserializer
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsProfessor,IsCollege,IsStudent
 from rest_framework import generics,filters
-from .models import CustomUser,Students,Professors,College,Attendance
+from .models import CustomUser,Students,Professors,College,Attendance, Contact
 from rest_framework import filters
 from authentication.search import DynamicSearchFilter
 
@@ -177,4 +177,9 @@ class ListAttendance(generics.ListCreateAPIView):
 class DetailAttendance(generics.RetrieveUpdateDestroyAPIView):
     queryset = Attendance.objects.all()
     serializer_class = Attendanceserializer
+    permission_classes = [permissions.AllowAny,]
+
+class MakeContact(generics.CreateAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = Contactserializer
     permission_classes = [permissions.AllowAny,]

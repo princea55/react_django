@@ -7,6 +7,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
+import Footer from './footer/footer';
 
 export default class Student_search extends Component {
     constructor(props) {
@@ -66,7 +67,8 @@ export default class Student_search extends Component {
     }
     render() {
         return (
-            <div className="container mt-5">
+            <div>
+                 <div className="container my-5 pb-5">
                 {/* serach bar */}
                 <div className="my-4 p-3">
                     <form onSubmit={this.handleSubmit} noValidate autoComplete="off" >
@@ -186,7 +188,9 @@ export default class Student_search extends Component {
                     }
                 </div>
             </div>
-
+                <Footer/>
+            </div>
+           
         )
     }
 }

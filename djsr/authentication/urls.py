@@ -33,4 +33,6 @@ urlpatterns = [
     path('studentlist/',ListStudents.as_view()),
     # Attendance
     path('attendancelist/',ListAttendance.as_view()),
+    #MakeContact
+    path('contactus/', MakeContact.as_view()),
 ]

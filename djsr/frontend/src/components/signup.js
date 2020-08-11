@@ -11,6 +11,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Footer from "./footer/footer";
 
 
 
@@ -60,117 +61,118 @@ class Signup extends Component {
                 });
             }
         }
-
-
     }
 
 
     render() {
         return (
-            <div className="container mt-5 shadow p-5 mb-5 bg-white rounded">
+            <div>
+                <div className="container mt-5 shadow p-5 mb-5 bg-white rounded">
 
-                <div className="d-flex justify-content-center">
-                    <h1>Signup</h1><br />
+<div className="d-flex justify-content-center">
+    <h1>Signup</h1><br />
 
-                </div>
-                <div className="d-flex p-4 justify-content-center ">
-                    <div>
+</div>
+<div className="d-flex p-4 justify-content-center ">
+    <div>
 
-                        <form onSubmit={this.handleSubmit} noValidate autoComplete="off" >
-                            <TextField
-                                error={this.state.errors.username ? true : false}
-                                style={component_margin}
-                                className="inputs componentsMargin"
+        <form onSubmit={this.handleSubmit} noValidate autoComplete="off" >
+            <TextField
+                error={this.state.errors.username ? true : false}
+                style={component_margin}
+                className="inputs componentsMargin"
 
-                                type="text"
-                                name="username"
-                                FormHelperTextProps={{ color: "red" }}
-                                helperText={this.state.errors.username ? this.state.errors.username : null}
-                                value={this.state.username}
-                                onChange={this.handleChange}
-                                label="Username"
-                                variant="outlined" />
+                type="text"
+                name="username"
+                FormHelperTextProps={{ color: "red" }}
+                helperText={this.state.errors.username ? this.state.errors.username : null}
+                value={this.state.username}
+                onChange={this.handleChange}
+                label="Username"
+                variant="outlined" />
 
-                            <br />
+            <br />
 
-                            <TextField
-                                error={this.state.errors.email ? true : false}
-                                style={component_margin}
-                                className="inputs componentsMargin"
+            <TextField
+                error={this.state.errors.email ? true : false}
+                style={component_margin}
+                className="inputs componentsMargin"
 
-                                type="email"
-                                name="email"
-                                label="Email"
-                                variant="outlined"
-                                value={this.state.email}
-                                helperText={this.state.errors.email ? this.state.errors.email : null}
-                                onChange={this.handleChange} />
+                type="email"
+                name="email"
+                label="Email"
+                variant="outlined"
+                value={this.state.email}
+                helperText={this.state.errors.email ? this.state.errors.email : null}
+                onChange={this.handleChange} />
 
-                            <br />
-                            <FormControl required
-                                style={dropdown}
-                            >
+            <br />
+            <FormControl required
+                style={dropdown}
+            >
 
-                                <Select
+                <Select
 
-                                    labelId="demo-simple-select-required-label"
-                                    id="demo-simple-select-required"
-                                    name="user_type"
-                                    value={this.state.user_type}
-                                    onChange={this.handleChange}
-                                    className="componentsMargin"
-                                >
-                                    <MenuItem value="Student">Student</MenuItem>
-                                    <MenuItem value="College">College</MenuItem>
-                                    <MenuItem value="Professor">Professor</MenuItem>
+                    labelId="demo-simple-select-required-label"
+                    id="demo-simple-select-required"
+                    name="user_type"
+                    value={this.state.user_type}
+                    onChange={this.handleChange}
+                    className="componentsMargin"
+                >
+                    <MenuItem value="Student">Student</MenuItem>
+                    <MenuItem value="College">College</MenuItem>
+                    <MenuItem value="Professor">Professor</MenuItem>
 
-                                </Select>
-                                <FormHelperText>Select Your type</FormHelperText>
-                            </FormControl><br />
-                            <TextField
-                                error={this.state.errors.password ? true : false}
-                                style={component_margin}
-                                className="inputs componentsMargin"
+                </Select>
+                <FormHelperText>Select Your type</FormHelperText>
+            </FormControl><br />
+            <TextField
+                error={this.state.errors.password ? true : false}
+                style={component_margin}
+                className="inputs componentsMargin"
 
-                                type="password"
-                                name="password"
-                                label="Password"
-                                variant="outlined"
-                                value={this.state.password}
-                                helperText={this.state.errors.password ? this.state.errors.password : null}
-                                onChange={this.handleChange} />
+                type="password"
+                name="password"
+                label="Password"
+                variant="outlined"
+                value={this.state.password}
+                helperText={this.state.errors.password ? this.state.errors.password : null}
+                onChange={this.handleChange} />
 
-                            <br />
+            <br />
 
-                            <TextField
-                                error={this.state.invalid_confirm ? true : false}
-                                style={component_margin}
-                                className="inputs componentsMargin"
+            <TextField
+                error={this.state.invalid_confirm ? true : false}
+                style={component_margin}
+                className="inputs componentsMargin"
 
-                                type="password"
-                                name="confirm_password"
-                                label="Confirm Password"
-                                variant="outlined"
-                                helperText="Both password should be match"
-                                value={this.state.confirm_password}
-                                onChange={this.handleChange} />
+                type="password"
+                name="confirm_password"
+                label="Confirm Password"
+                variant="outlined"
+                helperText="Both password should be match"
+                value={this.state.confirm_password}
+                onChange={this.handleChange} />
 
-                            <br />
+            <br />
 
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                style={submit}
-                                type="submit"
-                            >
-                                Signup
-                             </Button>
-                        </form>
-                    </div>
-                </div>
+            <Button
+                variant="contained"
+                color="primary"
+                style={submit}
+                type="submit"
+            >
+                Signup
+             </Button>
+        </form>
+    </div>
+</div>
+</div>
+
+<Footer/>
             </div>
-
-
+            
         )
     }
 }

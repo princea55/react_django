@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import clsx from 'clsx';
 import { Router, Route, Link } from "react-router-dom";
+import { LinkContainer } from 'react-router-bootstrap'
 import { createBrowserHistory } from "history";
 
 import { withStyles } from '@material-ui/core/styles';
@@ -14,6 +15,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import Clock from 'react-live-clock';
 
 import Login from "./login";
 import Signup from "./signup";
@@ -25,6 +27,8 @@ import StudentList from './StudentList';
 import Student_search from './Student_search';
 import Student_detail from './Student_detail';
 import Professor_search from './Professor_search';
+import Contact from './contact/contact';
+
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -32,11 +36,12 @@ const history = createBrowserHistory();
 const styles = theme => ({
     root: {
         flexGrow: 1,
-
-
     },
     flex: {
         flex: 1
+    },
+    grow: {
+        flexGrow: 1,
     },
     drawerPaper: {
         position: "relative",
@@ -54,11 +59,17 @@ const styles = theme => ({
     bodyContent: {
         height: "100%"
 
-    }
+    },
+    sectionDesktop: {
+        display: 'none',
+        [theme.breakpoints.up('md')]: {
+            display: 'flex',
+        },
+    },
 });
 
 const MyToolbar = withStyles(styles)(
-    ({ classes, title, onMenuClick }) => (
+    ({ classes, title, onMenuClick, username }) => (
         <Fragment>
             <AppBar className={classes.aboveDrawer}>
                 <Toolbar>
@@ -70,6 +81,20 @@ const MyToolbar = withStyles(styles)(
                     >
                         <MenuIcon />
                     </IconButton>
+                    <Typography>
+                        <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Home</Link>
+                        <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')} >Contact Us</Link>
+                        <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Help</Link>
+                    </Typography>
+                    <div className={classes.grow} />
+                    <div className={classes.sectionDesktop}>
+                        <Typography className="my-4">
+                        <Clock format={'dddd, MMMM Mo, h:mm:ss A'} ticking={true} timezone={'IN/Pacific'} />
+                        </Typography>
+                        <Typography className="my-4 mx-2 text-uppercase">
+                            {username?username:""}
+                        </Typography>
+                    </div>
                 </Toolbar>
 
             </AppBar>
@@ -119,6 +144,11 @@ const OnlyLoginSignup = withStyles(styles)(
                         path="/profile/"
                         render={(routeprops) => <CollegeDetail  {...routeprops} />}
                     />
+                    <Route
+                        exact
+                        path="/contactus/"
+                        render={(routeprops) => <Contact  {...routeprops} />}
+                    />
 
                 </main>
             </div>
@@ -129,7 +159,7 @@ const OnlyLoginSignup = withStyles(styles)(
 
 
 const MyDrawer = withStyles(styles)(
-    ({ classes, variant, open, onClose, onItemClick, user_type }) => (
+    ({ classes, variant, open, onClose, onItemClick, user_type}) => (
         <Router history={history}>
             <Drawer variant={variant} open={open} onClose={onClose}
                 classes={{
@@ -188,7 +218,7 @@ const MyDrawer = withStyles(styles)(
                     <ListItem button component={Link} to="/select_college/" onClick={onItemClick('College')}>
                         <ListItemText>Select College</ListItemText>
                     </ListItem>
-                    <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
+                    <ListItem button component={Link} to="/logout/" onClick={onItemClick()}>
                         <ListItemText>Logout</ListItemText>
                     </ListItem>
                 </List>) : (null)}
@@ -247,6 +277,11 @@ const MyDrawer = withStyles(styles)(
                     />
                     <Route
                         exact
+                        path="/contactus/"
+                        render={(routeprops) => <Contact  {...routeprops} />}
+                    />
+                    <Route
+                        exact
                         path="/logout/"
                         render={(routeprops) => <Logout  {...routeprops} />}
                     />
@@ -258,8 +293,10 @@ const MyDrawer = withStyles(styles)(
 );
 
 function AppBarInteraction({ classes, variant }) {
+    const current_user = JSON.parse(localStorage.getItem("current_user"));
     const [drawer, setDrawer] = useState(false);
     const [title, setTitle] = useState('Appbar');
+    // const [username, setUsername] = useState(current_user.username);
 
     const toggleDrawer = () => {
         setDrawer(!drawer);
@@ -270,19 +307,23 @@ function AppBarInteraction({ classes, variant }) {
         setDrawer(variant === 'temporary' ? drawer : false);
         setDrawer(!drawer);
     };
-
-    const current_user = JSON.parse(localStorage.getItem("current_user"));
+    // const logoutClick = () =>{
+    //     setUsername("");
+    //     console.log("logout");
+    // }
+    
     if (localStorage.getItem("islogin")) {
+        const current_user = JSON.parse(localStorage.getItem("current_user"));
         return (
             <div className={classes.bodyContent}>
                 <div className={classes.root, classes.bodyContent}>
-                    <MyToolbar title={title} onMenuClick={toggleDrawer} />
+                    <MyToolbar title={title} onMenuClick={toggleDrawer}username={current_user.username} />
                     <MyDrawer
                         open={drawer}
                         onClose={toggleDrawer}
                         onItemClick={onItemClick}
                         user_type={current_user.user_type}
-
+                        
                         variant={variant}
                     />
                 </div>
@@ -292,7 +333,7 @@ function AppBarInteraction({ classes, variant }) {
         return (
             <div className={classes.bodyContent}>
                 <div className={classes.root, classes.bodyContent}>
-                    <MyToolbar title={title} onMenuClick={toggleDrawer} />
+                    <MyToolbar title={title} onMenuClick={toggleDrawer} username={null} />
                     <OnlyLoginSignup
                         open={drawer}
                         onClose={toggleDrawer}

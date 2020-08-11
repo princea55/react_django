@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import axiosInstance from "../axiosApi";
+import Footer from './footer/footer';
 export default class ProfessorList extends Component {
     constructor(props) {
         super(props);
@@ -87,58 +89,72 @@ export default class ProfessorList extends Component {
         this.record_list(current_user_detail.college, current_user.user_type, current_user_detail.department);
     }
     render() {
-        if (this.state.user_type === 'College' || (this.state.user_type === 'Professor'&& this.state.check_approve === true)) {
+        if (this.state.user_type === 'College' || (this.state.user_type === 'Professor' && this.state.check_approve === true)) {
             return (
-                <div className="container">
+                <div>
+                    <div className="container">
 
-                    <div className="table-responsive mt-3">
-                        <table className="table table-hover">
-                            <caption>List of Professors</caption>
-                            <thead>
-                                <tr className="table-info">
-                                    <th scope="col"></th>
-                                    <th scope="col">Username</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Department</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">College</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    Object.keys(this.state.professor_list).map((item, i) => (
+                        <div className="table-responsive mt-3">
+                            <table className="table table-hover">
+                                <caption>List of Professors</caption>
+                                <thead>
+                                    <tr className="table-info">
+                                        <th scope="col"></th>
+                                        <th scope="col">Username</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Department</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">College</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        Object.keys(this.state.professor_list).map((item, i) => (
 
-                                        this.state.professor_list[item].is_active === "True" ? (null) : (
-                                            <tr key={i}>
-                                                <th scope="row">{i + 1}</th>
+                                            this.state.professor_list[item].is_active === "True" ? (null) : (
+                                                <tr key={i}>
+                                                    <th scope="row">{i + 1}</th>
 
-                                                <td>{this.state.professor_list[item].username}</td>
-                                                <td>{this.state.professor_list[item].email}</td>
-                                                <td>{this.state.professor_list[item].department}</td>
-                                                <td>{this.state.professor_list[item].role}</td>
-                                                <td>{this.state.professor_list[item].college}</td>
-                                                <td><button type="button" onClick={() => this.approve_record(this.state.professor_list[item].id)} className="btn btn-danger">Approve</button></td>
-                                                <td><button type="button" onClick={() => this.delete_record(this.state.professor_list[item].id)} className="btn btn-danger">Delete</button></td>
-                                            </tr>
-                                        )
+                                                    <td>{this.state.professor_list[item].username}</td>
+                                                    <td>{this.state.professor_list[item].email}</td>
+                                                    <td>{this.state.professor_list[item].department}</td>
+                                                    <td>{this.state.professor_list[item].role}</td>
+                                                    <td>{this.state.professor_list[item].college}</td>
+                                                    <td><Button
+                                                        type="button"
+                                                        variant="outline-success"
+                                                        onClick={() => this.approve_record(this.state.professor_list[item].id)}
 
-
-                                    ))
-                                }
-                            </tbody>
-                        </table>
+                                                    >Approve</Button></td>
+                                                    <td><Button
+                                                        type="button"
+                                                        variant="outline-danger"
+                                                        onClick={() => this.delete_record(this.state.professor_list[item].id)}
+                                                    >Delete</Button></td>
+                                                </tr>
+                                            )
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                    <Footer />
                 </div>
+
             )
         } else {
             return (
-                <div className="container mt-5">
-                    <div className="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Warning: </strong>You're not authorized to access this page!
+                <div>
+                    <div className="container mt-5">
+                        <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>Warning: </strong>You're not authorized to access this page!
                         <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     </div>
+                    <Footer />
                 </div>
             )
 

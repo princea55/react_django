@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axiosInstance from "../axiosApi";
 import Avatar from '@material-ui/core/Avatar';
+import Footer from './footer/footer';
 
 export default class Professor_detail extends Component {
     constructor(props) {
@@ -40,25 +41,28 @@ export default class Professor_detail extends Component {
     }
     render() {
         return (
-            <div className="container mt-3">
-                <div className="card mb-3" >
-                    <div className="row no-gutters">
-                        <div className="col">
-                            <Avatar style={{ marginTop: "1.5rem", marginLeft: "20rem" }}>{this.state.avatar}</Avatar>
-                        </div>
-                        <div className="col-md-8">
-                            <div className="card-body">
-                                <h5 className="card-title text-capitalize font-weight-bolder">{this.state.professor_detail.username}</h5>
+            <div>
+                <div className="container mt-3">
+                    <div className="card mb-3" >
+                        <div className="row no-gutters">
+                            <div className="col">
+                                <Avatar style={{ marginTop: "1.5rem", marginLeft: "20rem" }}>{this.state.avatar}</Avatar>
                             </div>
-                            <ul className="list-group list-group-flush text-dark">
-                                <li className="list-group-item"><p className="text-muted">Email </p>{this.state.professor_detail.email}</li>
-                                <li className="list-group-item"><p className="text-muted">Department </p>{this.state.professor_detail.department}</li>
-                                <li className="list-group-item"><p className="text-muted">Semester </p>{this.state.professor_detail.role}</li>
-                                <li className="list-group-item"><p className="text-muted">College </p>{this.state.professor_detail.college}</li>
-                            </ul>
+                            <div className="col-md-8">
+                                <div className="card-body">
+                                    <h5 className="card-title text-capitalize font-weight-bolder">{this.state.professor_detail.username}</h5>
+                                </div>
+                                <ul className="list-group list-group-flush text-dark">
+                                    <li className="list-group-item"><p className="text-muted">Email </p>{this.state.professor_detail.email}</li>
+                                    <li className="list-group-item"><p className="text-muted">Department </p>{this.state.professor_detail.department}</li>
+                                    <li className="list-group-item"><p className="text-muted">Semester </p>{this.state.professor_detail.role}</li>
+                                    <li className="list-group-item"><p className="text-muted">College </p>{this.state.professor_detail.college}</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <Footer />
             </div>
         )
     }

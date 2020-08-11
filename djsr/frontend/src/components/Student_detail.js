@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axiosInstance from "../axiosApi";
 import Avatar from '@material-ui/core/Avatar';
+import Footer from './footer/footer';
 
 export default class Student_detail extends Component {
     constructor(props) {
@@ -41,7 +42,8 @@ export default class Student_detail extends Component {
     }
     render() {
         return (
-            <div className="container mt-3">
+           <div>
+                <div className="container mt-3">
                 <div className="card mb-3" >
                     <div className="row no-gutters">
                         <div className="col">
@@ -65,6 +67,8 @@ export default class Student_detail extends Component {
                 </div>
 
             </div>
+            <Footer/>
+           </div>
         )
     }
 }
