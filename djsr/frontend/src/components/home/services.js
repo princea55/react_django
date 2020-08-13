@@ -45,7 +45,7 @@ export default class Service extends Component {
   render() {
     const { services } = this.state;
     return (
-      <div className="pt-5 p-2 bg-light">
+      <div className="pt-5 py-2 bg-light">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-6 col-md-10">

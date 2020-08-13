@@ -1,13 +1,41 @@
 import React, { Component } from 'react'
 import cus3 from './img/customer3.jpg';
-import cus4 from './img/customer4.jpg';
+import cus4 from './img/prince.jpg';
 import cus5 from './img/customer5.jpg';
 import cus2 from './img/customer2.jpg';
 
 export default class OurTeam extends Component {
+    constructor() {
+        super();
+        this.state = {
+            members: [
+                {
+                    name: "Prince Suriya",
+                    image: cus4,
+                    expert: "Full Stack Developer"
+                },
+                {
+                    name: "Jaydeep Talaviya",
+                    image: cus3,
+                    expert: "Ui Designer/Developer"
+                },
+                {
+                    name: "Harshal Jadhav",
+                    image: cus5,
+                    expert: "Ui Designer/Developer"
+                },
+                {
+                    name: "Hiren Lakhani",
+                    image: cus2,
+                    expert: "Ui Designer/Developer"
+                },
+            ]
+        }
+    }
     render() {
+        const { members } = this.state;
         return (
-            <div className="pt-5 p-2">
+            <div className="pt-5 py-2">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-6 col-md-10">
@@ -18,17 +46,23 @@ export default class OurTeam extends Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-4 col-sm-6">
-                            <div className="team-style-eleven text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0s">
-                                <div className="team-image">
-                                    <img className="rounded-circle" width="250" height="270" src={cus2} alt="Team" />
+
+                        {
+                            members.map((item, i) => (
+                                <div className="col">
+                                    <div className="team-style-eleven text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0s" key={i}>
+                                        <div className="team-image">
+                                            <img className="rounded-circle" width="200" height="200" src={item.image} alt="Team" />
+                                        </div>
+                                        <div className="team-content">
+                                            <h4 className="team-name">{item.name}</h4>
+                                            <span className="sub-title">{item.expert}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="team-content">
-                                    <h4 className="team-name">Jeffery Riley</h4>
-                                    <span className="sub-title">Art Director</span>
-                                </div>
-                            </div>
-                        </div>
+                            ))
+                        }
+
 
                     </div>
                 </div>

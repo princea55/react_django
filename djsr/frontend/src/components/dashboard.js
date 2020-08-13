@@ -29,7 +29,7 @@ import Student_detail from './Student_detail';
 import Professor_search from './Professor_search';
 import Contact from './contact/contact';
 import Home from './home/Home';
-
+import css from '../components/style_back.css';
 const drawerWidth = 240;
 const history = createBrowserHistory();
 
@@ -89,9 +89,9 @@ const MyToolbar = withStyles(styles)(
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <Typography className="my-4">
-                        <Clock format={'dddd, MMMM Mo, h:mm:ss A'} ticking={true} timezone={'IN/Pacific'} />
+                            <Clock format={'dddd, MMMM Mo, h:mm:ss A'} ticking={true} timezone={'IN/Pacific'} />
                         </Typography>
-                        
+
                     </div>
                 </Toolbar>
 
@@ -129,6 +129,11 @@ const OnlyLoginSignup = withStyles(styles)(
                 <main className={classes.content}>
                     <Route
                         exact
+                        path="/"
+                        render={(routeprops) => <Home  {...routeprops} />}
+                    />
+                    <Route
+                        exact
                         path="/login/"
                         render={(routeprops) => <Login  {...routeprops} />}
                     />
@@ -162,7 +167,7 @@ const OnlyLoginSignup = withStyles(styles)(
 
 
 const MyDrawer = withStyles(styles)(
-    ({ classes, variant, open, onClose, onItemClick, user_type}) => (
+    ({ classes, variant, open, onClose, onItemClick, user_type }) => (
         <Router history={history}>
             <Drawer variant={variant} open={open} onClose={onClose}
                 classes={{
@@ -232,6 +237,11 @@ const MyDrawer = withStyles(styles)(
 
 
                 <main className={classes.content}>
+                    <Route
+                        exact
+                        path="/"
+                        render={(routeprops) => <Home  {...routeprops} />}
+                    />
                     <Route
                         exact
                         path="/login/"
@@ -304,7 +314,7 @@ function AppBarInteraction({ classes, variant }) {
     const current_user = JSON.parse(localStorage.getItem("current_user"));
     const [drawer, setDrawer] = useState(false);
     const [title, setTitle] = useState('Appbar');
-    
+
 
     const toggleDrawer = () => {
         setDrawer(!drawer);
@@ -315,12 +325,12 @@ function AppBarInteraction({ classes, variant }) {
         setDrawer(variant === 'temporary' ? drawer : false);
         setDrawer(!drawer);
     };
-    
-    
+
+
     if (localStorage.getItem("islogin")) {
         const current_user = JSON.parse(localStorage.getItem("current_user"));
         return (
-            <div className={classes.bodyContent}>
+            <div className="bodycontent">
                 <div className={classes.root, classes.bodyContent}>
                     <MyToolbar title={title} onMenuClick={toggleDrawer} />
                     <MyDrawer
@@ -328,7 +338,7 @@ function AppBarInteraction({ classes, variant }) {
                         onClose={toggleDrawer}
                         onItemClick={onItemClick}
                         user_type={current_user.user_type}
-                        
+
                         variant={variant}
                     />
                 </div>

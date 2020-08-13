@@ -38,7 +38,7 @@ export default class Testimonials extends Component {
     render() {
         const { customers } = this.state;
         return (
-            <div className="pt-5 p-2 bg-light">
+            <div className="pt-5 py-2 bg-light">
                 <div className="">
 
                     <div class="row justify-content-center p-2 mb-2">
