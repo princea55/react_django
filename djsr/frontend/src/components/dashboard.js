@@ -28,7 +28,7 @@ import Student_search from './Student_search';
 import Student_detail from './Student_detail';
 import Professor_search from './Professor_search';
 import Contact from './contact/contact';
-
+import Home from './home/Home';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -69,7 +69,7 @@ const styles = theme => ({
 });
 
 const MyToolbar = withStyles(styles)(
-    ({ classes, title, onMenuClick, username }) => (
+    ({ classes, title, onMenuClick }) => (
         <Fragment>
             <AppBar className={classes.aboveDrawer}>
                 <Toolbar>
@@ -82,7 +82,7 @@ const MyToolbar = withStyles(styles)(
                         <MenuIcon />
                     </IconButton>
                     <Typography>
-                        <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Home</Link>
+                        <Link to="/home/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/home/')}>Home</Link>
                         <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')} >Contact Us</Link>
                         <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Help</Link>
                     </Typography>
@@ -91,9 +91,7 @@ const MyToolbar = withStyles(styles)(
                         <Typography className="my-4">
                         <Clock format={'dddd, MMMM Mo, h:mm:ss A'} ticking={true} timezone={'IN/Pacific'} />
                         </Typography>
-                        <Typography className="my-4 mx-2 text-uppercase">
-                            {username?username:""}
-                        </Typography>
+                        
                     </div>
                 </Toolbar>
 
@@ -149,6 +147,11 @@ const OnlyLoginSignup = withStyles(styles)(
                         path="/contactus/"
                         render={(routeprops) => <Contact  {...routeprops} />}
                     />
+                    <Route
+                        exact
+                        path="/home/"
+                        render={(routeprops) => <Home  {...routeprops} />}
+                    />
 
                 </main>
             </div>
@@ -187,7 +190,7 @@ const MyDrawer = withStyles(styles)(
                     <ListItem button component={Link} to="/students_search/" onClick={onItemClick('Students Search')}>
                         <ListItemText>Students Search</ListItemText>
                     </ListItem>
-                    <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
+                    <ListItem button component={Link} to="/logout/" onClick={onItemClick()}>
                         <ListItemText>Logout</ListItemText>
                     </ListItem>
                 </List>) : (null)}
@@ -282,6 +285,11 @@ const MyDrawer = withStyles(styles)(
                     />
                     <Route
                         exact
+                        path="/home/"
+                        render={(routeprops) => <Home  {...routeprops} />}
+                    />
+                    <Route
+                        exact
                         path="/logout/"
                         render={(routeprops) => <Logout  {...routeprops} />}
                     />
@@ -296,7 +304,7 @@ function AppBarInteraction({ classes, variant }) {
     const current_user = JSON.parse(localStorage.getItem("current_user"));
     const [drawer, setDrawer] = useState(false);
     const [title, setTitle] = useState('Appbar');
-    // const [username, setUsername] = useState(current_user.username);
+    
 
     const toggleDrawer = () => {
         setDrawer(!drawer);
@@ -307,17 +315,14 @@ function AppBarInteraction({ classes, variant }) {
         setDrawer(variant === 'temporary' ? drawer : false);
         setDrawer(!drawer);
     };
-    // const logoutClick = () =>{
-    //     setUsername("");
-    //     console.log("logout");
-    // }
+    
     
     if (localStorage.getItem("islogin")) {
         const current_user = JSON.parse(localStorage.getItem("current_user"));
         return (
             <div className={classes.bodyContent}>
                 <div className={classes.root, classes.bodyContent}>
-                    <MyToolbar title={title} onMenuClick={toggleDrawer}username={current_user.username} />
+                    <MyToolbar title={title} onMenuClick={toggleDrawer} />
                     <MyDrawer
                         open={drawer}
                         onClose={toggleDrawer}
@@ -333,12 +338,11 @@ function AppBarInteraction({ classes, variant }) {
         return (
             <div className={classes.bodyContent}>
                 <div className={classes.root, classes.bodyContent}>
-                    <MyToolbar title={title} onMenuClick={toggleDrawer} username={null} />
+                    <MyToolbar title={title} onMenuClick={toggleDrawer} />
                     <OnlyLoginSignup
                         open={drawer}
                         onClose={toggleDrawer}
                         onItemClick={onItemClick}
-
                         variant={variant}
                     />
                 </div>
