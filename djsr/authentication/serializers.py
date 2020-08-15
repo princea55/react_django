@@ -71,7 +71,7 @@ class Studentserializer(serializers.ModelSerializer):
 class Attendanceserializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
-        fields = ['id','username','enrollment','created_date','today_attendance']
+        fields = ['id','enrollment','created_date','sem']
 
 
 

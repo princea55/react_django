@@ -179,7 +179,7 @@ export default class Student_search extends Component {
                                         type="submit"
 
                                     >
-                                        Detail View
+                                        <a target="_blank"> DETAIL VIEW</a>
                                     </Button>
                                     {/* <a href="#" className="card-link">Another link</a> */}
                                 </div>

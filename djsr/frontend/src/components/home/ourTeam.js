@@ -49,7 +49,7 @@ export default class OurTeam extends Component {
 
                         {
                             members.map((item, i) => (
-                                <div className="col">
+                                <div className="col" key={i}>
                                     <div className="team-style-eleven text-center mt-30 wow fadeIn" data-wow-duration="1s" data-wow-delay="0s" key={i}>
                                         <div className="team-image">
                                             <img className="rounded-circle" width="200" height="200" src={item.image} alt="Team" />

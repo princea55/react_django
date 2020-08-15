@@ -59,6 +59,7 @@ class Students(models.Model):
     semester = models.CharField(max_length=5, blank=False)
     department = models.CharField(max_length=50, blank=False)
     is_approve = models.BooleanField(default=False)
+    total_attendance = models.IntegerField(default=0)
     objects = models.Manager()
 
     def __str__(self):
@@ -66,14 +67,13 @@ class Students(models.Model):
 
 
 class Attendance(models.Model):
-    username = models.CharField(max_length=300, blank=False)
     enrollment = models.CharField(max_length=50, blank=False)
     created_date = models.DateField(default=date.today)
-    today_attendance = models.CharField(max_length=20)
+    sem = models.IntegerField()
 
 
     def __str__(self):
-        return self.username
+        return self.enrollment
 
 class Contact(models.Model):
     email = models.CharField(max_length=50, blank=False, null=False)

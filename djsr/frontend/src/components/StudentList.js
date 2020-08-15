@@ -126,7 +126,7 @@ export default class ProfessorList extends Component {
 
                                                 >
                                                     Approve
-                        </Button></td>
+                                                </Button></td>
                                                 <td><Button
                                                     variant="outline-danger"
                                                     color="secondary"
@@ -135,7 +135,7 @@ export default class ProfessorList extends Component {
                                                     startIcon={<DeleteIcon />}
                                                 >
                                                     Delete
-                        </Button></td>
+                                                </Button></td>
                                             </tr>
                                         ))
                                     }

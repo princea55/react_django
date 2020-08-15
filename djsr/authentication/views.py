@@ -167,15 +167,17 @@ class ListStudents(generics.ListAPIView):
 # Attendanceserializer View
 
 class ListAttendance(generics.ListCreateAPIView):
-    search_fields = ['username','=enrollment','created_date']
+    search_fields = ['=enrollment']
     filter_backends = (filters.SearchFilter,)
-    queryset = Attendance.objects.all()
+    queryset = Attendance.objects.all().order_by('created_date')
     serializer_class = Attendanceserializer
     permission_classes = [permissions.AllowAny,]
 
 
 class DetailAttendance(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Attendance.objects.all()
+    search_fields = ['=enrollment']
+    filter_backends = (filters.SearchFilter,)
+    queryset = Attendance.objects.all().order_by('-created_date')
     serializer_class = Attendanceserializer
     permission_classes = [permissions.AllowAny,]
 

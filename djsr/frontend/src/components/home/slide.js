@@ -7,10 +7,10 @@ function Slide_home(props) {
         <div>
             <div>
                 <img className="hero" src={hero} alt="hero" />
-                <div class="hero-text-box">
+                <div className="hero-text-box">
                     <h1 className="text-capitalize">Website Name</h1>
-                        <a class="btn btn-full" href="#" title="">Subtitle</a>
-                        <a class="btn btn-ghost" href="#" title="">Other text</a>
+                        <a className="btn btn-full" href="#" title="">Subtitle</a>
+                        <a className="btn btn-ghost" href="#" title="">Other text</a>
 		            </div>
                 </div>
            

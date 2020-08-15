@@ -27,9 +27,9 @@ class StudentsAdmin(admin.ModelAdmin):
     list_per_page = 30
 
 class AttendanceAdmin(admin.ModelAdmin):
-    list_display = ('id','enrollment', 'username', 'created_date','today_attendance')
-    list_display_links = ('id','username','enrollment')
-    search_fields = ('enrollment','username')
+    list_display = ('id','enrollment','created_date','sem')
+    list_display_links = ('id','enrollment')
+    search_fields = ('enrollment',)
     list_per_page = 50
 
 class ContactAdmin(admin.ModelAdmin):

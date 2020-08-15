@@ -89,7 +89,7 @@ const MyToolbar = withStyles(styles)(
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <Typography className="my-4">
-                            <Clock format={'dddd, MMMM Mo, h:mm:ss A'} ticking={true} timezone={'IN/Pacific'} />
+                            {/* <Clock format={'dddd, MMMM Mo, h:mm:ss A'} ticking={true} timezone={'IN/Pacific'} /> */}
                         </Typography>
 
                     </div>
@@ -212,6 +212,12 @@ const MyDrawer = withStyles(styles)(
                     </ListItem>
                     <ListItem button component={Link} to="/students_list/" onClick={onItemClick('StudentsList')}>
                         <ListItemText>Students List</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/professors_search/" onClick={onItemClick('Professors Search')}>
+                        <ListItemText>Professors Search</ListItemText>
+                    </ListItem>
+                    <ListItem button component={Link} to="/students_search/" onClick={onItemClick('Students Search')}>
+                        <ListItemText>Students Search</ListItemText>
                     </ListItem>
                     <ListItem button component={Link} to="/logout/" onClick={onItemClick('Logout')}>
                         <ListItemText>Logout</ListItemText>
