@@ -179,7 +179,8 @@ const MyDrawer = withStyles(styles)(
                         [classes.toolbarMargin]: variant === 'persistent'
                     })}
                 />
-                {user_type === 'College' ? (<List>
+                {user_type === 'College' ? (
+                <List>
                     <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>
                         <ListItemText>Profile</ListItemText>
                     </ListItem>

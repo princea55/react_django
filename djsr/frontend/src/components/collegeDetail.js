@@ -30,7 +30,7 @@ class CollegeDetail extends Component {
             student_list: [],
             SemSearchField: "",
             MonthSearchField: "",
-            Monthlist: ["01", "02", "03", "04", "05", "06", "07", "08","09","10","11","12"]
+            Monthlist: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
         };
         this.attendance_list = this.attendance_list.bind(this);
     }
@@ -75,13 +75,12 @@ class CollegeDetail extends Component {
                 enrollment: current_user_detail.enrollment,
                 role: current_user_detail.role,
             });
-            this.setState({SemSearchField:current_user_detail.semester})
-        }
-        this.attendance_list(current_user_detail.enrollment);
+            this.setState({ SemSearchField: current_user_detail.semester })
+            if (current_user.user_type === 'Student') {
+                this.attendance_list(current_user_detail.enrollment);
+            }
 
-        // if(current_user.user_type === "Student"){
-        // this.attendance_list(current_user_detail.enrollment);
-        // }
+        }
     }
     render() {
         const filterstdlist = this.state.student_list.filter(
@@ -228,12 +227,7 @@ class CollegeDetail extends Component {
                                     </div>
                                 </div>
                             </div>
-                            {/* <Button
-                                type="button"
-                                variant="outline-success"
-                                onClick={() => this.attendance_list()}
-
-                            >Show Atteandace</Button> */}
+                           
 
                         </div>
 
@@ -253,20 +247,20 @@ class CollegeDetail extends Component {
                                         </div>
                                     </div>
                                     <div className="col-sm">
-                                    <input
-                                                className="form-control"
-                                                type="search"
-                                                placeholder="Search By Month"
-                                                onChange={(e) => this.setState({ MonthSearchField: e.target.value })}
-                                            />
+                                        <input
+                                            className="form-control"
+                                            type="search"
+                                            placeholder="Search By Month"
+                                            onChange={(e) => this.setState({ MonthSearchField: e.target.value })}
+                                        />
                                     </div>
 
                                 </div>
                             </div>
                         </div>
-                       <div className="mb-4">
+                        <div className="mb-4">
                             <Attendance filterlst={filterstdlist} />
-                       </div>
+                        </div>
 
                         <div className="mt-4">
                             <Footer />
