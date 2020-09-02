@@ -17,26 +17,26 @@ export default function Faq() {
     const classes = useStyles();
     const faq_list = [
         {
-            question: " I want to buy a theme - what are the steps?",
-            answser: "simple. Each theme has a live preview. Once you have selected a theme or template, which is to your liking, you can quickly andsecurely pay via Paypal."
+            question: "Does it show historically data?",
+            answser: "You can see your past attendance and also you can search previous semster records."
 
 
         },
         {
-            question: " I want to buy a theme - what are the steps?",
-            answser: "simple. Each theme has a live preview. Once you have selected a theme or template, which is to your liking, you can quickly andsecurely pay via Paypal."
+            question: "Does your information secure?",
+            answser: "Yes your login data are saved using SHA256 encrption algorithum."
 
 
         },
         {
-            question: " I want to buy a theme - what are the steps?",
-            answser: "simple. Each theme has a live preview. Once you have selected a theme or template, which is to your liking, you can quickly andsecurely pay via Paypal."
+            question: "Does your website show realtime attendance?",
+            answser: "Yes. You can serach by month and semester."
 
 
         },
         {
-            question: " I want to buy a theme - what are the steps?",
-            answser: "simple. Each theme has a live preview. Once you have selected a theme or template, which is to your liking, you can quickly andsecurely pay via Paypal."
+            question: "Can students modify their details?",
+            answser: "ofcourse students can modify their college, deparment, and semester."
 
 
         },

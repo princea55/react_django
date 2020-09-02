@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import cus3 from './img/customer3.jpg';
-import cus4 from './img/prince.jpg';
-import cus5 from './img/customer5.jpg';
-import cus2 from './img/customer2.jpg';
+import cus3 from './img/jaydeep.jpg';
+import cus4 from './img/prince.png';
+import cus5 from './img/harshal.png';
+import cus2 from './img/hiren.png';
 
 export default class OurTeam extends Component {
     constructor() {
@@ -17,17 +17,17 @@ export default class OurTeam extends Component {
                 {
                     name: "Jaydeep Talaviya",
                     image: cus3,
-                    expert: "Ui Designer/Developer"
+                    expert: "ML Engineer"
                 },
                 {
                     name: "Harshal Jadhav",
                     image: cus5,
-                    expert: "Ui Designer/Developer"
+                    expert: "MERN Stack Developer"
                 },
                 {
                     name: "Hiren Lakhani",
                     image: cus2,
-                    expert: "Ui Designer/Developer"
+                    expert: "Backend Developer/Ui Designer"
                 },
             ]
         }

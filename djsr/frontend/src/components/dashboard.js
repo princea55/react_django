@@ -82,13 +82,16 @@ const MyToolbar = withStyles(styles)(
                         <MenuIcon />
                     </IconButton>
                     <Typography>
-                        <Link to="/home/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/home/')}>Home</Link>
+                        {/* <Link to="/home/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/home/')}>Home</Link>
                         <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')} >Contact Us</Link>
-                        <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Help</Link>
+                        <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Help</Link> */}
                     </Typography>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <Typography className="my-4">
+                        <Link to="/home/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/home/')}>Home</Link>
+                        <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')} >Contact Us</Link>
+                        <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Help</Link>
                             {/* <Clock format={'dddd, MMMM Mo, h:mm:ss A'} ticking={true} timezone={'IN/Pacific'} /> */}
                         </Typography>
 

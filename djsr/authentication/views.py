@@ -149,7 +149,7 @@ class DetailStudent(generics.RetrieveAPIView):
 class UpdateStudent(generics.UpdateAPIView):
     queryset = Students.objects.all()
     serializer_class = Studentserializer
-    permission_classes = [IsStudent|IsProfessor]
+    permission_classes = [permissions.AllowAny,]
 
 class DestroyStudent(generics.DestroyAPIView):
     queryset = Students.objects.all()

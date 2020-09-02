@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import service1 from "./ads/SPRINTER (1).png";
-import service2 from "./ads/SPRINTER (2).png";
-import service3 from "./ads/SPRINTER (3).png";
-import service4 from "./ads/SPRINTER (4).png";
-import service5 from "./ads/SPRINTER (5).png";
+import service1 from "./ads/1.jpg";
+import service2 from "./ads/2.jpg";
+import service3 from "./ads/3.jpg";
+import service4 from "./ads/4.jpg";
+import service5 from "./ads/5.png";
 export default class Service extends Component {
   constructor() {
     super();
@@ -12,7 +12,7 @@ export default class Service extends Component {
         {
           name: "Face Recognition",
           detail:
-            "Get the best Attedance Management System for your College. A powerful cloud-based solution. Manage at your premises with smart cloud based solution.",
+            "Get the best Attedance Management System for your College. Liveness dectection and recognized human being face with 95%+ accuracy.",
           image: service1,
         },
         {
@@ -24,7 +24,7 @@ export default class Service extends Component {
         {
           name: "Authorization",
           detail:
-            "All the faculties are authorized by HOD or principal and every student is authorized by their respective HOD and department faculties.",
+            "All the faculties are authorized by HOD or principal and every student is authorized by their respective HOD and department faculties. Role based authorization as per needed.",
           image: service3,
         },
         {
@@ -34,9 +34,9 @@ export default class Service extends Component {
           image: service4,
         },
         {
-          name: "Review Attendance Online",
+          name: "Real Time Search",
           detail:
-            "Professor or HOD can review every student's attendance. For example too low or medium etc.",
+            "Students and Professors can filter attendance record by month and semester. Search reaults show instantly.",
           image: service5,
         },
       ],
@@ -68,6 +68,8 @@ export default class Service extends Component {
                   <img
                     className="card-img-top"
                     src={item.image}
+                    width="200"
+                    height="200"
                     alt="Card image cap"
                   />
                   <div className="card-body">

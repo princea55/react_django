@@ -30,7 +30,7 @@ class CollegeDetail extends Component {
             student_list: [],
             SemSearchField: "",
             MonthSearchField: "",
-            Monthlist: ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+            
         };
         this.attendance_list = this.attendance_list.bind(this);
     }

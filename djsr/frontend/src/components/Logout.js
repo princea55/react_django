@@ -17,6 +17,7 @@ class Logout extends Component {
             localStorage.removeItem('islogin');
             localStorage.removeItem('std_id');
             axiosInstance.defaults.headers['Authorization'] = null;
+            console.log("logout")
             this.props.history.push("/login/")
         }
         catch (e) {
