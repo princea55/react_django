@@ -7,7 +7,7 @@ export default function HomeFooter() {
                 <footer className="page-footer font-small">
 
                     <div className="footer-copyright text-center ">© 2020 Copyright:
-                        <a href="https://ABC.com/"> ABC.com</a>
+                        <a href="https://ABC.com/"> muster.com</a>
                     </div>
                 </footer>
             </div>

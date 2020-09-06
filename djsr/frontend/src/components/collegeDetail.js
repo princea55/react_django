@@ -29,7 +29,7 @@ class CollegeDetail extends Component {
             sem_group: "",
             student_list: [],
             SemSearchField: "",
-            MonthSearchField: "",
+            MonthSearchField: "09",
             
         };
         this.attendance_list = this.attendance_list.bind(this);
@@ -83,8 +83,10 @@ class CollegeDetail extends Component {
         }
     }
     render() {
+        console.log(this.state.SemSearchField);
+        console.log(this.state.MonthSearchField);
         const filterstdlist = this.state.student_list.filter(
-            (std) => std.sem == this.state.SemSearchField || std.created_date.substring(5, 7) == this.state.MonthSearchField
+            (std) => (std.sem == this.state.SemSearchField && std.created_date.substring(5, 7) == this.state.MonthSearchField)
         );
         // console.log(filterstdlist);
         if (this.state.islogin) {

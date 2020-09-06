@@ -9,7 +9,7 @@ export default class Attendance extends Component {
   }
   render() {
     // console.log("better");
-    console.log(this.props.filterlst);
+    // console.log(this.props.filterlst);
     // console.log(filterlst);
 
     return (

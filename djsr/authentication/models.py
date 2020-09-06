@@ -31,6 +31,8 @@ class College(models.Model):
 
     def __str__(self):
         return self.college
+    class Meta:
+        verbose_name_plural = "College"
 
 
 class Professors(models.Model):
@@ -49,6 +51,8 @@ class Professors(models.Model):
 
     def __str__(self):
         return self.user.username
+    class Meta:
+        verbose_name_plural = "Professors"
 
 
 class Students(models.Model):
@@ -64,6 +68,9 @@ class Students(models.Model):
 
     def __str__(self):
         return self.user.username
+    class Meta:
+        verbose_name_plural = "Students"
+    
 
 
 class Attendance(models.Model):
@@ -74,6 +81,9 @@ class Attendance(models.Model):
 
     def __str__(self):
         return self.enrollment
+    
+    class Meta:
+        verbose_name_plural = "Attendance"
 
 class Contact(models.Model):
     email = models.CharField(max_length=50, blank=False, null=False)
@@ -81,3 +91,6 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.email
+    
+    class Meta:
+        verbose_name_plural = "Contact"

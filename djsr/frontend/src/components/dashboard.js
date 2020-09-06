@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import Clock from 'react-live-clock';
-
+import logo from './img/logo.jpeg';
 import Login from "./login";
 import Signup from "./signup";
 import College from "./college";
@@ -85,6 +85,8 @@ const MyToolbar = withStyles(styles)(
                         {/* <Link to="/home/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/home/')}>Home</Link>
                         <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')} >Contact Us</Link>
                         <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Help</Link> */}
+                    {/* <img src={logo}/> */}
+                    <h4 className="logo mt-1"> <span className="logo-first">M</span>uster</h4>
                     </Typography>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>

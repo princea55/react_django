@@ -7,3 +7,9 @@
     rgba(0, 212, 255, 1) 69%
   );
 }
+.logo{
+  font-family: 'Audiowide', cursive;
+}
+.logo-first{
+  font-size: 50px;
+}
