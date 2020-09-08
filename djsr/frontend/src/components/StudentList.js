@@ -86,7 +86,7 @@ export default class ProfessorList extends Component {
         this.record_list(college_serach, department_search);
     }
     render() {
-        if ((this.state.user_type === 'College' && this.state.check_approve === true) || (this.state.user_type === 'Professor' && this.state.check_approve === true)) {
+        if ((this.state.user_type === 'College') || (this.state.user_type === 'Professor' && this.state.check_approve === true)) {
             return (
                 <div>
                     <div className="container">

@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import Clock from 'react-live-clock';
-import logo from './img/logo.jpeg';
+import logo from './img/m2.png';
 import Login from "./login";
 import Signup from "./signup";
 import College from "./college";
@@ -85,15 +85,23 @@ const MyToolbar = withStyles(styles)(
                         {/* <Link to="/home/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/home/')}>Home</Link>
                         <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')} >Contact Us</Link>
                         <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Help</Link> */}
-                    {/* <img src={logo}/> */}
-                    <h4 className="logo mt-1"> <span className="logo-first">M</span>uster</h4>
+                        <div className="mt-1  logo-name">
+                            <div className=" mb-1 img-logo">
+                                <img src={logo} height="50" width="50" />
+                            </div>
+                            <div className="mt-1 text-logo">
+                                <h4 className="logo">muster</h4>
+                            </div>
+
+
+                        </div>
                     </Typography>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <Typography className="my-4">
-                        <Link to="/home/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/home/')}>Home</Link>
-                        <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')} >Contact Us</Link>
-                        <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Help</Link>
+                            <Link to="/home/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/home/')}>Home</Link>
+                            <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')} >Contact Us</Link>
+                            <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Help</Link>
                             {/* <Clock format={'dddd, MMMM Mo, h:mm:ss A'} ticking={true} timezone={'IN/Pacific'} /> */}
                         </Typography>
 
@@ -185,26 +193,26 @@ const MyDrawer = withStyles(styles)(
                     })}
                 />
                 {user_type === 'College' ? (
-                <List>
-                    <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>
-                        <ListItemText>Profile</ListItemText>
-                    </ListItem>
-                    <ListItem button component={Link} to="/select_college/" onClick={onItemClick('College')}>
-                        <ListItemText>Select College</ListItemText>
-                    </ListItem>
-                    <ListItem button component={Link} to="/professors_list/" onClick={onItemClick('ProfessorsList')}>
-                        <ListItemText>Professors List</ListItemText>
-                    </ListItem>
-                    <ListItem button component={Link} to="/professors_search/" onClick={onItemClick('Professors Search')}>
-                        <ListItemText>Professors Search</ListItemText>
-                    </ListItem>
-                    <ListItem button component={Link} to="/students_search/" onClick={onItemClick('Students Search')}>
-                        <ListItemText>Students Search</ListItemText>
-                    </ListItem>
-                    <ListItem button component={Link} to="/logout/" onClick={onItemClick()}>
-                        <ListItemText>Logout</ListItemText>
-                    </ListItem>
-                </List>) : (null)}
+                    <List>
+                        <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>
+                            <ListItemText>Profile</ListItemText>
+                        </ListItem>
+                        <ListItem button component={Link} to="/select_college/" onClick={onItemClick('College')}>
+                            <ListItemText>Select College</ListItemText>
+                        </ListItem>
+                        <ListItem button component={Link} to="/professors_list/" onClick={onItemClick('ProfessorsList')}>
+                            <ListItemText>Professors List</ListItemText>
+                        </ListItem>
+                        <ListItem button component={Link} to="/professors_search/" onClick={onItemClick('Professors Search')}>
+                            <ListItemText>Professors Search</ListItemText>
+                        </ListItem>
+                        <ListItem button component={Link} to="/students_search/" onClick={onItemClick('Students Search')}>
+                            <ListItemText>Students Search</ListItemText>
+                        </ListItem>
+                        <ListItem button component={Link} to="/logout/" onClick={onItemClick()}>
+                            <ListItemText>Logout</ListItemText>
+                        </ListItem>
+                    </List>) : (null)}
 
                 {user_type === 'Professor' ? (<List>
                     <ListItem button component={Link} to="/profile/" onClick={onItemClick('CollegeDetail')}>

@@ -19,6 +19,7 @@ export default class Student_search extends Component {
             department: "",
             college_serach_name: "",
             student_list: "",
+            check_approve:"true"
 
         }
         this.handleChange = this.handleChange.bind(this);
@@ -47,7 +48,7 @@ export default class Student_search extends Component {
         this.props.history.push("/student_profile/");
     }
     componentDidMount() {
-        let college_serach;
+        let college_serach,approve;
         this.setState({ islogin: true });
         const current_user = JSON.parse(localStorage.getItem("current_user"))
         this.setState({
@@ -58,14 +59,20 @@ export default class Student_search extends Component {
                 localStorage.getItem("current_user_detail")
             );
             college_serach = current_user_detail.college
+            if(current_user.user_type === "Professor"){
+                approve = current_user_detail.is_approve
+                this.setState({check_approve: approve});
+            }
             this.setState({
                 college_serach_name: college_serach
+                
             });
         } else {
             this.setState({ invalid_college: true })
         }
     }
     render() {
+        
         return (
             <div>
                  <div className="container my-5 pb-5">
@@ -146,6 +153,7 @@ export default class Student_search extends Component {
                                         color="primary"
                                         className="form-control"
                                         type="submit"
+                                        disabled={this.state.check_approve? false:true}
                                     >
                                         Search
                                     </Button>

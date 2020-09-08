@@ -11,7 +11,8 @@ export default class ProfessorList extends Component {
             professor_list: "",
             user_type: "",
             college_serach_name: "",
-            department_serach_name: ""
+            department_serach_name: "",
+            check_approve: ""
         };
         this.record_list = this.record_list.bind(this);
         this.delete_record = this.delete_record.bind(this);
@@ -81,6 +82,7 @@ export default class ProfessorList extends Component {
             this.setState({
                 college_serach_name: current_user_detail.college,
                 department_serach_name: current_user_detail.department,
+                check_approve: current_user_detail.is_approve
             });
 
         } else {

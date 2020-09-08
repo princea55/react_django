@@ -9,7 +9,19 @@
 }
 .logo{
   font-family: 'Audiowide', cursive;
+  color: black;
 }
 .logo-first{
   font-size: 50px;
+}
+.logo-name{
+  white-space:nowrap;
+}
+.img-logo{
+  display: inline-block;
+}
+
+.text-logo{
+  display: inline-block;
+  /* white-space:nowrap */
 }
