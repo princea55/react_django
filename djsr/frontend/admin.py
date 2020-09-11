@@ -26,7 +26,7 @@ class ProfessorsAdmin(admin.ModelAdmin):
 class StudentsAdmin(admin.ModelAdmin):
     list_display = ('id','enrollment', 'user', 'college', 'department','semester','is_approve')
     list_display_links = ('id','user','enrollment')
-    search_fields = ('college','enrollment','department')
+    search_fields = ('college','enrollment')
     list_filter = ('is_approve','department','semester')
     list_per_page = 30
     actions = ["export_as_csv"]

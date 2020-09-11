@@ -29,8 +29,8 @@ class Logout extends Component {
     }
     render() {
         return (
-            <div>
-                <h1>logout</h1>
+            <div className="container">
+                <h1 className="align-middle d-flex justify-content-center">loging out</h1>
             </div>
         )
     }

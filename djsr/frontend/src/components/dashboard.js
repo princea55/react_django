@@ -30,6 +30,9 @@ import Professor_search from './Professor_search';
 import Contact from './contact/contact';
 import Home from './home/Home';
 import css from '../components/style_back.css';
+import Help from './help/Help';
+import { FormHelperText } from '@material-ui/core';
+
 const drawerWidth = 240;
 const history = createBrowserHistory();
 
@@ -101,7 +104,7 @@ const MyToolbar = withStyles(styles)(
                         <Typography className="my-4">
                             <Link to="/home/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/home/')}>Home</Link>
                             <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')} >Contact Us</Link>
-                            <Link to="/contactus/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/contactus/')}>Help</Link>
+                            <Link to="/help/" className="text-decoration-none text-white mx-2" onClick={() => history.push('/help/')}>Help</Link>
                             {/* <Clock format={'dddd, MMMM Mo, h:mm:ss A'} ticking={true} timezone={'IN/Pacific'} /> */}
                         </Typography>
 
@@ -169,6 +172,11 @@ const OnlyLoginSignup = withStyles(styles)(
                         exact
                         path="/home/"
                         render={(routeprops) => <Home  {...routeprops} />}
+                    />
+                    <Route
+                        exact
+                        path="/help/"
+                        render={(routeprops) => <Help  {...routeprops} />}
                     />
 
                 </main>
@@ -317,6 +325,11 @@ const MyDrawer = withStyles(styles)(
                         exact
                         path="/home/"
                         render={(routeprops) => <Home  {...routeprops} />}
+                    />
+                    <Route
+                        exact
+                        path="/help/"
+                        render={(routeprops) => <Help  {...routeprops} />}
                     />
                     <Route
                         exact
